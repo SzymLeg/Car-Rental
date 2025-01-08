@@ -44,7 +44,7 @@ exports.getCustomerById = async (req, res) => {
 // Aktualizacja klienta
 exports.updateCustomer = async (req, res) => {
   const { id } = req.params;
-  const { first_name, last_name, email, phone_number, birthdate, permissions } = req.body;
+  const { first_name, last_name, address, email, phone_number, birthdate, permissions } = req.body;
 
   try {
     const customer = await Customer.findByPk(id);
@@ -54,6 +54,7 @@ exports.updateCustomer = async (req, res) => {
 
     customer.first_name = first_name;
     customer.last_name = last_name;
+    customer.address = address;
     customer.email = email;
     customer.phone_number = phone_number;
     customer.birthdate = birthdate;

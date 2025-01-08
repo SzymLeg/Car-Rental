@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
+const bcrypt = require('bcryptjs');
 
 // Inicjalizacja Sequelize z danymi połączenia z MySQL
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -9,39 +10,28 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 
 // Definiowanie modelu User (Customer)
 const Customer = sequelize.define('Customer', {
-  first_name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  last_name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  address: {
-    type: DataTypes.STRING(255),
-    allowNull: true,  // optional field
-  },
-  email: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    unique: true,
-  },
-  phone_number: {
-    type: DataTypes.STRING(15),
-    allowNull: true,  // optional field
-  },
-  birthdate: {
-    type: DataTypes.DATE,
-    allowNull: true,  // optional field
-  },
-  permissions: {
-    type: DataTypes.STRING(255),
-    allowNull: true,  // optional field
-  },
+  first_name: { type: DataTypes.STRING(100), allowNull: false },
+  last_name: { type: DataTypes.STRING(100), allowNull: false },
+  address: { type: DataTypes.STRING(255), allowNull: true },
+  email: { type: DataTypes.STRING(100), allowNull: false, unique: true },
+  phone_number: { type: DataTypes.STRING(15), allowNull: true },
+  birthdate: { type: DataTypes.DATE, allowNull: true },
+  permissions: { type: DataTypes.STRING(255), allowNull: true },
+  password: { type: DataTypes.STRING(255), allowNull: false },  
 }, {
-  // Opcjonalne ustawienia, np. automatyczna aktualizacja tabeli
-  timestamps: false,  // jeśli nie chcesz automatycznie dodawania timestampów (createdAt, updatedAt)
+  timestamps: false,
 });
+
+// Przed zapisaniem użytkownika, zahaszowanie hasła
+Customer.beforeCreate(async (customer, options) => {
+  const salt = await bcrypt.genSalt(10);
+  customer.password = await bcrypt.hash(customer.password, salt);
+});
+
+// Metoda do porównania hasła
+Customer.prototype.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 // Synchronizacja modelu z bazą danych
 sequelize.sync()
