@@ -43,11 +43,36 @@ async function login(req, res) {
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ 
+      message: 'Login successful',
+      token, 
+      user: {
+      firstName: customer.first_name,
+      lastName: customer.last_name,
+    },
+  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 }
 
-module.exports = { register, login };
+// Sprawdzenie, czy email istnieje w bazie
+async function checkEmail(req, res) {
+  const { email } = req.query;
+
+  try {
+    const existingCustomer = await Customer.findOne({ where: { email } });
+    if (existingCustomer) {
+      return res.status(200).json({ exists: true, message: 'Email exists' });
+    } else {
+      return res.status(200).json({ exists: false, message: 'Email not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+
+
+module.exports = { register, login, checkEmail };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Importuj useNavigate
 
-function Header() {
+function Header({ user }) {
   const navigate = useNavigate(); // Tworzymy funkcję do nawigacji
 
   const handleLoginClick = () => {
@@ -18,8 +18,12 @@ function Header() {
 
           <div className="right">
             <button id="login" onClick={handleLoginClick}>
+              {user ? (
+              <p>Witaj, {user.firstName} {user.lastName}!</p> // Wyświetlamy imię i nazwisko w przycisku
+            ) : (
               <p>Zaloguj się</p>
-            </button>
+            )}
+            </button> 
             <button id="login"><p>Lokalizacje</p></button>
             <button id="login"><p>Oferta</p></button>
           </div>
