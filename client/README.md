@@ -1,3 +1,18 @@
+Domyślną stroną jest strona z listą pojazdów - zaimplementowano formularz pozwalający na zawężanie listy wyników z bazy - należy dorobić odpowiednie kwerendy
+
+Klikając LPM na "Zaloguj się" w headerze jesteśmy przenoszeni do strony /login, gdzie użytkownik się loguje lub rejestruje.
+
+1. Najpierw użytkownik wpisuje mail i gdy takiego maila wpisze i zatwierdzi, program wyszukuje mail w bazie danych - jeżeli istnieje to użytkownik chce się zalogować (2), jeżeli nie to zarejestrować (3).
+
+2. Użytkownik wpisuje hasło i po poprawnym zalogowaniu wraca na stronę główną - można wtedy zamiast "Zaloguj się" w headerze wyświetlić jego imię i nazwisko.
+
+3. Użytkownik wpisuje niezbędne dane do założenia konta i po poprawnym uzupełnieniu danych konto jest dodawane do bazy danych, tak samo jak w (2) wracamy do strony głównej i wyświetlamy jego imię i nazwisko w rogu.
+
+Formularz logowania/rejestracji zawiera 3 sekcje, które należy wyświetlać i ukrywać (display: block; display: none;) oraz przykładowe errory, gdy przykładowo wpisze maila bez @ (.error: visibility: visible; visibility: hidden; <- należy dopisać odpowiednie ID/klasy, żeby nie odsłaniać wszystkich jednocześnie)
+
+Wygląd stron jest roboczy, CSS będzie jeszcze poprawiany, ale nie wpłynie to na całokształt.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
