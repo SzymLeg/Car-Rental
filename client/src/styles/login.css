@@ -1,0 +1,98 @@
+body {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.left, .right {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+header h4 {
+    line-height: 80px;
+    color: white;
+}
+
+.resizer {
+    position: relative;
+    max-width: 960px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#fullScreen {
+    position: relative;
+    width: 100vw; height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+    position: relative;
+    width: 100vw;
+    height: 80px;
+    background-color: #003b95;
+}
+
+/* LOGIN / REGISTER PANEL */
+
+#loginScreen {
+    position: relative;
+    width: 100%; height: calc(100% - 80px);
+}
+
+#loginPanel {
+    position: relative;
+    width: 45%; height: 100%;
+    margin: 0 auto;
+}
+
+
+.loginB {
+    display: block;
+}
+
+.loginC,
+.registerC {
+    display: none;
+}
+
+
+#loginPanel h1 {
+    padding-top: 50px;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+#loginPanel .loginInput {
+    position: relative;
+    width: calc(100% - 32px);
+    padding: 16px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+#loginPanel .loginButton {
+    position: relative;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s;
+    background-color: #006ce4;
+}
+
+#loginPanel .loginButton:hover, #loginPanel .loginButton:active {
+    background-color: #003b95;
+}
+
+.error {
+    color: #d4111e;
+    visibility: hidden;
+}
