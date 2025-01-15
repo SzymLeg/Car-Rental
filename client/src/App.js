@@ -29,7 +29,7 @@ function App() {
       <div>
         {/* Warunkowe renderowanie Header i Footer */}
         <Routes>
-          <Route path="/" element={<><Header user={user}/><CarForm /><CarList /><Footer /></>} />
+          <Route path="/" element={<><Header user={user} setUser={setUser}/><CarForm /><CarList /><Footer /></>} />
           <Route path="/login" element={<Login setUser={setUser}/>} />
         </Routes>
       </div>

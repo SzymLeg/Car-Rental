@@ -9,13 +9,31 @@ async function register(req, res) {
   const { first_name, last_name, email, password } = req.body;
 
   try {
+    // Sprawdzenie, czy użytkownik o podanym emailu już istnieje
     const existingCustomer = await Customer.findOne({ where: { email } });
     if (existingCustomer) {
       return res.status(400).json({ error: 'Email already in use' });
     }
 
+    // Tworzenie nowego użytkownika
     const customer = await Customer.create({ first_name, last_name, email, password });
-    res.status(201).json({ message: 'Customer registered successfully' });
+
+    // Generowanie tokenu JWT dla nowego użytkownika
+    const token = jwt.sign(
+      { id: customer.id, email: customer.email },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    // Zwrócenie tokenu i danych użytkownika w odpowiedzi
+    res.status(201).json({
+      message: 'Customer registered successfully',
+      token, // Token JWT
+      user: {
+        firstName: customer.first_name,
+        lastName: customer.last_name,
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });

@@ -1,11 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Importuj useNavigate
 
-function Header({ user }) {
+function Header({ user, setUser }) {
   const navigate = useNavigate(); // Tworzymy funkcję do nawigacji
 
   const handleLoginClick = () => {
-    navigate('/login'); // Przenosimy użytkownika do strony logowania
+    if (!user) {
+      navigate("/login");
+    } // Przenosimy użytkownika do strony logowania
+  };
+
+  const handleLogoutClick = () => {
+    if (user) {
+    // Usuń dane użytkownika (np. z localStorage lub sessionStorage)
+    localStorage.removeItem('user');  // Przykład usunięcia danych użytkownika z localStorage
+    localStorage.removeItem("authToken");
+  localStorage.removeItem("userName");
+    setUser(null); // Ustawiamy stan użytkownika na null
+    navigate('/login'); // Przenosimy użytkownika na stronę logowania po wylogowaniu
+    }
+  };
+
+  const handleHomeClick = () => {
+    navigate('/'); // Przenosimy użytkownika na stronę główną
   };
 
   return (
@@ -13,19 +30,25 @@ function Header({ user }) {
       <div id="headerTop">
         <div className="resizer">
           <div className="left">
-            <h2>Wypożyczalnia samochodów</h2>
+            <h2 onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Wypożyczalnia samochodów</h2>
           </div>
 
           <div className="right">
+          {user && (
+              <button id="login" onClick={handleLogoutClick}><p>Wyloguj</p></button>
+            )}
             <button id="login" onClick={handleLoginClick}>
               {user ? (
-              <p>Witaj, {user.firstName} {user.lastName}!</p> // Wyświetlamy imię i nazwisko w przycisku
-            ) : (
-              <p>Zaloguj się</p>
-            )}
+                <>
+                  <p>Witaj, {user.firstName} {user.lastName}!</p> 
+                </>
+              ) : (
+                <p>Zaloguj się</p>
+              )}
             </button> 
             <button id="login"><p>Lokalizacje</p></button>
             <button id="login"><p>Oferta</p></button>
+             
           </div>
         </div>
       </div>

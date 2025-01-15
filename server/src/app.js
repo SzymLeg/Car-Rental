@@ -6,12 +6,14 @@ const vehicleRoutes = require('./routes/vehicleRoutes');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const authenticateJWT = require('./middleware/authMiddleware');
+const bodyParser = require('body-parser');
 
 
 // Middleware i inne konfiguracje
 const app = express();
 app.use(express.json());  // Parsowanie JSON w ciele żądania
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Montowanie tras
 app.use('/api/customers', customerRoutes);  // Wszystkie trasy w 'customerRoutes' będą dostępne pod '/api/customers'

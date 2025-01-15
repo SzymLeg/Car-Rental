@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
 
@@ -7,19 +7,29 @@ const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [birthDate, setBirthDate] = useState("");
+  const emailInputRef = useRef(null); // Ref dla pola e-mail
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const loginButton = document.querySelector(".loginB .loginButton");
     const emailInput = document.querySelector(".loginB .loginInput");
+    
+
+    if (emailInput) {
+      emailInput.focus(); // Ustaw fokus na polu e-mail
+    }
+
 
     if (loginButton) {
       loginButton.addEventListener("click", handleEmailSubmit);
     }
+
+    
+
 
     return () => {
       if (loginButton) {
@@ -27,6 +37,18 @@ const Login = ({ setUser }) => {
       }
     };
   }, []);
+
+
+  const handleKeyDown = (event, action) => {
+    if (event.key === "Enter") {
+      action();
+    }
+  };
+
+  const handleHomeClick = () => {
+    navigate('/'); // Przenosimy użytkownika na stronę główną
+  };
+  
 
   const handleEmailSubmit = () => {
     fetch(`http://localhost:5000/api/auth/check-email?email=${email}`, {
@@ -59,6 +81,7 @@ const Login = ({ setUser }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
+
     })
       .then((response) => response.json())
       .then((data) => {
@@ -71,7 +94,6 @@ const Login = ({ setUser }) => {
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
           setUser(userData);
           navigate("/");
-          alert("Zalogowano pomyślnie");
         } else {
           setError("Błędne dane logowania");
         }
@@ -85,25 +107,43 @@ const Login = ({ setUser }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ firstName, lastName, email, password}),
+      body: JSON.stringify({ first_name, last_name, email, password }),
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          alert("Zarejestrowano pomyślnie");
+        if (data.token) {
+          // Jeśli odpowiedź zawiera token, zapisujemy go w localStorage
+          localStorage.setItem("authToken", data.token);
+          const userData = {
+            firstName: data.user.firstName,
+            lastName: data.user.lastName,
+          };
+          localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
+  
+          // Ustawienie danych użytkownika w stanie aplikacji
+          setUser(userData);
+  
+          // Przekierowanie na stronę główną
+          navigate("/");
+  
+          // Komunikat po rejestracji
         } else {
           setError("Błąd podczas rejestracji");
         }
       })
-      .catch((error) => setError("Błąd serwera"));
+      .catch((error) => {
+        console.error("Błąd serwera:", error); // Zaloguj błąd serwera
+        setError("Błąd serwera");
+      });
   };
+  
 
   return (
     <div id="fullScreen">
       <header class="header">
         <div className="resizer">
           <div className="left">
-            <h4>Wypożyczalnia samochodów</h4>
+            <h4 onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Wypożyczalnia samochodów</h4>
           </div>
           <div className="right"></div>
         </div>
@@ -116,7 +156,7 @@ const Login = ({ setUser }) => {
               <h1>Zaloguj się lub utwórz konto</h1>
               <p>Aby uzyskać dostęp do naszych usług, możesz zalogować się przy użyciu danych konta.</p>
               <p><b>Adres e-mail</b></p>
-              <input className="loginInput" type="text" placeholder="Wpisz swój adres e-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input ref={emailInputRef} className="loginInput" type="text" placeholder="Wpisz swój adres e-mail" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleEmailSubmit)} />
               <p className="error">Sprawdź, czy podany adres e-mail jest prawidłowy</p>
               <button className="loginButton" onClick={handleEmailSubmit}><b>Kontynuuj za pomocą e-maila</b></button>
             </span>
@@ -125,7 +165,7 @@ const Login = ({ setUser }) => {
               <h1>Zaloguj się</h1>
               <p>Już jesteś naszym użytkownikiem. Zaloguj się, aby kontynuować.</p>
               <p><b>Hasło</b></p>
-              <input className="loginInput" type="password" placeholder="Wpisz swoje hasło" value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <input className="loginInput" type="password" placeholder="Wpisz swoje hasło" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleLogin)} />
               <p className="error">Sprawdź, czy podane hasło jest prawidłowe</p>
               <button className="loginButton" onClick={handleLogin}><b>Dokończ logowanie</b></button>
             </span>
@@ -134,10 +174,10 @@ const Login = ({ setUser }) => {
               <h1>Zarejestruj się</h1>
               <p>Nie jesteś naszym użytkownikiem. Zarejestruj się, aby kontynuować.</p>
               <p><b>Imię</b></p>
-              <input className="loginInput" type="text" placeholder="Wpisz swoje imię" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+              <input className="loginInput" type="text" placeholder="Wpisz swoje imię" value={first_name} onChange={(e) => setFirstName(e.target.value)}/>
               <p className="error">Sprawdź, czy podane imię jest prawidłowe</p>
               <p><b>Nazwisko</b></p>
-              <input className="loginInput" type="text" placeholder="Wpisz swoje nazwisko" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+              <input className="loginInput" type="text" placeholder="Wpisz swoje nazwisko" value={last_name} onChange={(e) => setLastName(e.target.value)}/>
               <p className="error">Sprawdź, czy podane nazwisko jest prawidłowe</p>
               <p><b>Data urodzenia</b></p>
               <input className="loginInput" type="date" placeholder="Podaj swoją datę urodzenia" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
