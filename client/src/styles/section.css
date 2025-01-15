@@ -1,0 +1,14 @@
+section {
+    position: relative;
+    width: 100vw;
+    min-height: calc(100vh - 540px);
+}
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+section h3 {
+    border-bottom: 1px solid lightgray;
+}

@@ -1,0 +1,27 @@
+.FAQquestion, 
+.FAQanwser {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+}
+
+.FAQquestion {
+    font-weight: 600;
+    padding-top: 20px;
+}
+
+.FAQlist {
+    padding-top: 0; margin: 0;
+}
+
+.FAQlist li {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.FAQquestion:nth-last-child(1),
+.FAQanwser:nth-last-child(1) {
+    padding-bottom: 30px;
+}

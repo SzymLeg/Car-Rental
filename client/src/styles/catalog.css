@@ -1,0 +1,121 @@
+.catalogPrompt {
+    font-size: 14px;
+}
+
+.availableCounter {
+    font-weight: 600;
+}
+
+#carCatalog {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+}
+
+#carFinder,
+#carList {
+    position: relative;
+    min-height: 100px;
+    margin: 10px;
+}
+
+#carFinder {
+    width: calc(33% - 20px);
+    border: 1px solid lightgray;
+    border-radius: 20px;
+}
+
+#carList {
+    width: calc(67% - 20px);
+}
+
+#carForm {
+    position: relative;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 10px;
+}
+
+#carForm h3 {
+    border-bottom: 0 !important;
+    border-top: 1px solid lightgray;
+}
+
+#cars {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0; 
+    padding: 0;
+}
+
+.car {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 16px -4px rgba(156, 158, 177, 1);
+    border-radius: 20px;
+    display: flex;
+}
+
+.carImg,
+.carInfo {
+    position: relative;
+    height: 100%;
+}
+
+.carImg {
+    width: 300px;
+    background-image: url(./avatarfhd.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.carInfo {
+    width: calc(100% - 300px);
+}
+
+.carBrand {
+    padding: 10px;
+    margin: 0;
+}
+
+ul.features {
+    padding-left: 10px;
+}
+
+ul.features li {
+    position: relative;
+    list-style-type: none;
+    background-image: url(./el_features.png);
+    background-repeat: no-repeat;
+    padding: 5px 20px 10px 35px;
+    float: left;
+}
+
+ul.features li.seats { background-position: 0 0; }
+ul.features li.luggage { background-position: 0 -60px; }
+ul.features li.doors { background-position: 0 -120px; }
+ul.features li.gearbox { background-position: 0 -180px; }
+ul.features li.location { background-position: 0 -240px; }
+ul.features li.fuel { background-position: 0 -300px; }
+ul.features li.kilometers { background-position: 0 -360px; }
+
+.loanDays,
+.loanPrice,
+.checkOffer {
+    position: relative;
+    text-align: right;
+    display: block;
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 10px;
+}

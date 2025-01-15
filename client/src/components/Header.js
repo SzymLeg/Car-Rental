@@ -26,6 +26,7 @@ function Header({ user, setUser }) {
   };
 
   return (
+    /*
     <header>
       <div id="headerTop">
         <div className="resizer">
@@ -57,6 +58,22 @@ function Header({ user, setUser }) {
         <div className="resizer"></div>
       </div>
     </header>
+    */
+
+    <header>
+        <div class="resizer">
+            <div class="left">
+                <h4 class="companyName">Wypożyczalnia samochodów</h4>
+            </div>
+
+            <div class="right">
+                <button id="login"><p>Zaloguj się</p></button>
+                <button id="login"><p>Lokalizacje</p></button>
+                <button id="login"><p>Oferta</p></button>
+            </div>
+        </div>
+    </header>
+
   );
 }
 

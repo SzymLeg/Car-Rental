@@ -1,0 +1,66 @@
+footer {
+    position: relative;
+    width: 100vw;
+    height: 300px;
+    padding: 50px 0;
+    background-color: #f5f5f5;
+}
+
+footer .resizer .left, 
+footer .resizer .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+footer iframe {
+    position: relative;
+    float: right;
+    left: 60px;
+    border: none;
+    width: 480px;
+    height: 100%;
+    border-radius: 25px;
+}
+
+#pageMap,
+#copyright {
+    position: relative;
+    width: 100vw;
+    height: 80px;
+}
+
+#pageMap { background-color: white; }
+#copyright { background-color: #f5f5f5; }
+
+#pageMap .resizer,
+#copyright .resizer {
+    border-top: 1px solid lightgray;
+}
+
+#pageMap p,
+#copyrightBy {
+    position: relative;
+    font-size: 12px;
+    color: #595959;
+    text-align: center;
+    line-height: 80px;
+}
+
+#pageMap p a {
+    margin: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+#pageMap p a:hover { text-decoration: underline; }
+
+.maping::after {
+    padding: 5px;
+    content: ". ";
+    position: absolute;
+    inset-block-end: -2px;
+    font-weight: 600;
+}
+
+.maping:nth-last-child(1)::after { content: ""; }

@@ -1,0 +1,123 @@
+#contactBox {
+    position: relative;
+    margin-top: 25px;
+    width: 100%;
+    height: 50vh;
+    background-color: lightgray;
+    border-radius: 20px;
+}
+
+#messenger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    top: 10px;
+    height: calc(45vh - 20px);
+    background-color: white;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+#messageHistory {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    position: relative;
+    display: flex;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.textMessageFrom {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 70%;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.textMessageTo {
+    background-color: #d1c4e9;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 70%;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: gray;
+    position: absolute;
+    bottom: -10px;
+}
+
+.timestamp.from {
+    left: 0;
+    padding-left: 10px;
+}
+
+.timestamp.to {
+    right: 0;
+    padding-right: 10px;
+}
+
+#sendMessage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    height: calc(5vh - 10px);
+    border-top: 1px solid #ddd;
+    padding: 0 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+#messageInput {
+    flex: 1;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+#sendButton {
+    margin-left: 10px;
+    padding: 5px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#sendButton:hover {
+    background-color: #45a049;
+}

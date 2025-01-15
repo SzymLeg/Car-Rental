@@ -1,0 +1,12 @@
+.aboutUsParagraph,
+.timelineParagraph {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+}
+
+.aboutUsParagraph,
+.timelineParagraph:nth-last-child(1) {
+    padding-bottom: 30px;
+}

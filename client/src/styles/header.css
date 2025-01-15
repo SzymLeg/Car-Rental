@@ -1,0 +1,35 @@
+header {
+    position: relative;
+    width: 100vw;
+    height: 80px;
+    background-color: #003b95;
+}
+
+.companyName {
+    line-height: 80px;
+    color: white;
+    font-weight: 600;
+}
+
+#login {
+    position: relative;
+    padding: 10px 20px;
+    background-color: transparent;
+    top: 50%; transform: translateY(-50%);
+    float: right;
+    border: 0px;
+    color: white;
+}
+
+#login p {
+    position: relative;
+    float: right;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#login:hover, #login:active {
+    background-color: white;
+    color: #003b95;
+}
