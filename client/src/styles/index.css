@@ -1,0 +1,155 @@
+#entryPanel {
+    position: relative;
+    width: 100%;
+    height: 20vh;
+    background-color: #003b95;
+}
+
+#entryPanel .resizer span {
+    position: relative;
+    top: 20%;
+}
+
+#entryPanel .resizer span h1,
+#entryPanel .resizer span h2 {
+    position: relative;
+    margin: 0; padding: 0;
+    color: white;
+    font-weight: 600;
+}
+
+#entryPanel .resizer span h1 {font-size: 46px;}
+
+#entryFormPanel {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 50px;
+}
+
+#entryFormPanel .top,
+#entryFormPanel .bottom {
+    position: relative;
+    width: 100%;
+    height: 75px;
+}
+
+#entryFormPanel .top { background-color: #003b95; }
+#entryFormPanel .bottom { background-color: white; }
+
+#entryFormBanner {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    top: 0;
+}
+
+#entryForm {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffd900;
+    border-radius: 10px;
+}
+
+#entryFormInside {
+    position: relative;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    margin: 0 auto; top: 5px;
+    border-radius: 5px;
+}
+
+.entryFormPart,
+.entryFormButton {
+    position: relative;
+    height: 100%;
+    float: left;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.entryFormPart {
+    width: calc(21.5% - 5px);
+    margin-right: 5px;
+}
+
+.entryFormButton {
+    width: calc(14%);
+}
+
+.formSearchButton {
+    position: relative;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s;
+    background-color: #006ce4;
+}
+
+.formSearchButton:hover,
+.formSearchButton:active {
+    background-color: #003b95;
+}
+
+.entryFormPart h4 {
+    position: relative;
+    left: 15px;
+    font-weight: 600;
+}
+
+.entryFormPart form span {
+    position: relative;
+    display: block;
+    left: 10px;
+}
+
+.entryFormPart form span .date,
+.entryFormPart form span .time {
+    position: relative;
+    width: calc(100% - 41px);
+    padding: 8px;
+}
+
+
+#entryOffer {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+}
+
+#entryOffer a {
+    font-weight: 600;
+    color: #009900;
+    text-decoration: none;
+}
+
+#entryOffer a:hover, #entryOffer a:active {
+    text-decoration: underline;
+}
+
+#fleetInfo {
+    position: relative;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    left: 20px; top: 20px;
+    background-color: white;
+    display: flex;
+}
+
+.car {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    padding: 5px;
+}
+
+.carImg {
+    position: relative;
+    width: 80%;
+    padding: 10px;
+}
