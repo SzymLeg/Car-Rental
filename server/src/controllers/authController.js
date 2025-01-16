@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
 // Rejestracja
 async function register(req, res) {
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, email, password, birthdate } = req.body;
 
   try {
     // Sprawdzenie, czy użytkownik o podanym emailu już istnieje
@@ -16,7 +16,7 @@ async function register(req, res) {
     }
 
     // Tworzenie nowego użytkownika
-    const customer = await Customer.create({ first_name, last_name, email, password });
+    const customer = await Customer.create({ first_name, last_name, email, password, birthdate });
 
     // Generowanie tokenu JWT dla nowego użytkownika
     const token = jwt.sign(
@@ -32,6 +32,8 @@ async function register(req, res) {
       user: {
         firstName: customer.first_name,
         lastName: customer.last_name,
+        id: customer.id,
+        birthdate: customer.birthdate,
       },
     });
   } catch (error) {
@@ -67,6 +69,7 @@ async function login(req, res) {
       user: {
       firstName: customer.first_name,
       lastName: customer.last_name,
+      id: customer.id,
     },
   });
   } catch (error) {

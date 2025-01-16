@@ -8,6 +8,9 @@ function Header({ user, setUser }) {
     if (!user) {
       navigate("/login");
     } // Przenosimy użytkownika do strony logowania
+    else {
+      navigate("/user-panel");
+    }
   };
 
   const handleLogoutClick = () => {
@@ -15,7 +18,7 @@ function Header({ user, setUser }) {
     // Usuń dane użytkownika (np. z localStorage lub sessionStorage)
     localStorage.removeItem('user');  // Przykład usunięcia danych użytkownika z localStorage
     localStorage.removeItem("authToken");
-  localStorage.removeItem("userName");
+    localStorage.removeItem("userName");
     setUser(null); // Ustawiamy stan użytkownika na null
     navigate('/login'); // Przenosimy użytkownika na stronę logowania po wylogowaniu
     }
@@ -23,6 +26,14 @@ function Header({ user, setUser }) {
 
   const handleHomeClick = () => {
     navigate('/'); // Przenosimy użytkownika na stronę główną
+  };
+
+  const handleBranchesClick = () => {
+    navigate('/branches'); // Przenosimy użytkownika na stronę "Lokalizacje"
+  };
+
+  const handleCatalogClick = () => {
+    navigate('/catalog'); // Przenosimy użytkownika na stronę "Lokalizacje"
   };
 
   return (
@@ -63,13 +74,23 @@ function Header({ user, setUser }) {
     <header>
         <div class="resizer">
             <div class="left">
-                <h4 class="companyName">Wypożyczalnia samochodów</h4>
+                <h4 class="companyName" onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Wypożyczalnia samochodów</h4>
             </div>
 
             <div class="right">
-                <button id="login"><p>Zaloguj się</p></button>
-                <button id="login"><p>Lokalizacje</p></button>
-                <button id="login"><p>Oferta</p></button>
+            {user && (
+              <button id="login" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}><p>Wyloguj</p></button>
+            )}
+                <button id="login" onClick={handleLoginClick} style={{ cursor: 'pointer' }}> 
+                  {user ? (
+                <>
+                  <p>Witaj, {user.firstName} {user.lastName}!</p> 
+                </>
+              ) : (
+                <p>Zaloguj się</p>
+              )}</button>
+                <button id="login" onClick={handleBranchesClick} style={{ cursor: 'pointer' }}><p>Lokalizacje</p></button>
+                <button id="login" onClick={handleCatalogClick} style={{ cursor: 'pointer' }}><p>Oferta</p></button>
             </div>
         </div>
     </header>

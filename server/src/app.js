@@ -7,6 +7,8 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const authenticateJWT = require('./middleware/authMiddleware');
 const bodyParser = require('body-parser');
+const messageRoutes = require('./routes/messageRoutes'); // Import tras wiadomości
+const adminRoutes = require('./routes/adminRoutes');
 
 
 // Middleware i inne konfiguracje
@@ -21,6 +23,10 @@ app.use('/api/customers', customerRoutes);  // Wszystkie trasy w 'customerRoutes
 app.use('/api/vehicles', vehicleRoutes);
 
 app.use('/api/auth', authRoutes);  // Ścieżki do logowania i rejestracji
+
+app.use('/api', messageRoutes);
+
+app.use('/api/admins', adminRoutes);
 
 
 // Uruchamianie serwera

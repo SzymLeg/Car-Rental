@@ -9,9 +9,10 @@ const Login = ({ setUser }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthdate, setBirthDate] = useState("");
   const emailInputRef = useRef(null); // Ref dla pola e-mail
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState(""); // Inicjalny brak błędu
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,8 +50,18 @@ const Login = ({ setUser }) => {
     navigate('/'); // Przenosimy użytkownika na stronę główną
   };
   
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex do walidacji e-maila
+    if (!emailRegex.test(email)) {
+      return false;
+    }
+    document.querySelector(".error").style.visibility = "hidden";
+    return true;
+  };
 
   const handleEmailSubmit = () => {
+    if (validateEmail(email)) {
+
     fetch(`http://localhost:5000/api/auth/check-email?email=${email}`, {
       method: "GET",
       headers: {
@@ -72,6 +83,9 @@ const Login = ({ setUser }) => {
         }
       })
       .catch((error) => setError("Błąd serwera"));
+    } else {
+      document.querySelector(".error").style.visibility = "visible";
+    }
   };
 
   const handleLogin = () => {
@@ -87,9 +101,11 @@ const Login = ({ setUser }) => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("authToken", data.token);
+          
           const userData = {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
+            id: data.user.id,
           };
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
           setUser(userData);
@@ -107,7 +123,7 @@ const Login = ({ setUser }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ first_name, last_name, email, password }),
+      body: JSON.stringify({ first_name, last_name, email, password, birthdate }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -117,6 +133,7 @@ const Login = ({ setUser }) => {
           const userData = {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
+            id: data.user.id,
           };
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
   
@@ -140,15 +157,7 @@ const Login = ({ setUser }) => {
 
   return (
     <div id="fullScreen">
-      <header class="header">
-        <div className="resizer">
-          <div className="left">
-            <h4 onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Wypożyczalnia samochodów</h4>
-          </div>
-          <div className="right"></div>
-        </div>
-      </header>
-
+      
       <div id="loginScreen">
         <div className="resizer">
           <div id="loginPanel">
@@ -156,7 +165,7 @@ const Login = ({ setUser }) => {
               <h1>Zaloguj się lub utwórz konto</h1>
               <p>Aby uzyskać dostęp do naszych usług, możesz zalogować się przy użyciu danych konta.</p>
               <p><b>Adres e-mail</b></p>
-              <input ref={emailInputRef} className="loginInput" type="text" placeholder="Wpisz swój adres e-mail" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleEmailSubmit)} />
+              <input ref={emailInputRef} className="loginInput" type="text" placeholder="Wpisz swój adres e-mail" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleEmailSubmit)} />{emailError && <p className="error">{emailError}</p>} {/* Komunikat o błędzie */}
               <p className="error">Sprawdź, czy podany adres e-mail jest prawidłowy</p>
               <button className="loginButton" onClick={handleEmailSubmit}><b>Kontynuuj za pomocą e-maila</b></button>
             </span>
@@ -180,7 +189,7 @@ const Login = ({ setUser }) => {
               <input className="loginInput" type="text" placeholder="Wpisz swoje nazwisko" value={last_name} onChange={(e) => setLastName(e.target.value)}/>
               <p className="error">Sprawdź, czy podane nazwisko jest prawidłowe</p>
               <p><b>Data urodzenia</b></p>
-              <input className="loginInput" type="date" placeholder="Podaj swoją datę urodzenia" value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
+              <input className="loginInput" type="date" placeholder="Podaj swoją datę urodzenia" value={birthdate} onChange={(e) => setBirthDate(e.target.value)}/>
               <p className="error">Sprawdź, czy podana data jest prawidłowa</p>
               <p><b>Utwórz hasło</b></p>
               <input className="loginInput" type="password" placeholder="Wpisz swoje hasło" value={password} onChange={(e) => setPassword(e.target.value)}/>

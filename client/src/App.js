@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import Login from "./components/Login";
 
 import './styles/about.css';
-import './styles/adminlogin.css';
+//import './styles/adminlogin.css';
 import './styles/branches.css';
 import './styles/catalog.css';
 import './styles/contact.css';
@@ -22,7 +22,7 @@ import './styles/faq.css';
 import './styles/fleetguide.css';
 import './styles/footer.css';
 import './styles/header.css';
-import './styles/index.css';
+//import './styles/index.css';
 import './styles/login.css';
 import './styles/section.css';
 import './styles/style.css';
@@ -48,8 +48,14 @@ function App() {
       <div>
         {/* Warunkowe renderowanie Header i Footer */}
         <Routes>
-          <Route path="/" element={<><Header user={user} setUser={setUser}/><CarForm /><CarList /><Footer /></>} />
-          <Route path="/login" element={<Login setUser={setUser}/>} />
+          <Route path="/" element={<><Header user={user} setUser={setUser}/><PageMap/><Footer/><Copyright /></>} />
+          <Route path="/catalog" element={<><Header user={user} setUser={setUser}/><CarForm /><CarList /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/login" element={<><Header user={user} setUser={setUser}/> <Login setUser={setUser}/><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/about" element={<><Header user={user} setUser={setUser}/><About /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/faq" element={<><Header user={user} setUser={setUser}/><Faq /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/admin-login" element={<><Header user={user} setUser={setUser}/><AdminLogin /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/branches" element={<><Header user={user} setUser={setUser}/><Branches /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/contact" element={<><Header user={user} setUser={setUser}/><Contact /><PageMap/><Footer /><Copyright /></>} />
         </Routes>
       </div>
     </Router>
