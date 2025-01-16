@@ -4,11 +4,29 @@ import axios from 'axios';
 
 
 function CarList() {
+  const [cars, setCars] = useState([]); // Stan dla listy samochodów
+  const [isLoading, setIsLoading] = useState(true); // Stan ładowania
+  const [error, setError] = useState(null); // Stan błędów
+
+  // Funkcja do pobrania danych z backendu
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/api/vehicles') // Zastąp odpowiednim URL swojego API
+      .then((response) => {
+        setCars(response.data); // Ustawienie danych samochodów
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError('Nie udało się załadować samochodów. Spróbuj ponownie później.');
+        setIsLoading(false);
+      });
+  }, []);
+
     return (
       <section>
       <div class="resizer">
           <h1>Katalog pojazdów</h1>
-          <h3>Przewodnik po flocie <span class="catalogPrompt">Znaleziono <span class="availableCounter">75</span> dostępnych pojazdów.</span></h3>
+          <h3>Przewodnik po flocie <span class="catalogPrompt">Znaleziono <span class="availableCounter">{cars.length}</span> dostępnych pojazdów.</span></h3>
 
           <div id="entryFormPanel">
               <div class="top"></div>
@@ -20,17 +38,17 @@ function CarList() {
                                   <div class="entryFormPart">
                                       <h4>Miejsce odbioru</h4>
                                       <form action="">
-                                          <span> <input type="radio" name="Katowice" class="pickupCar Katowice" id=""/> Katowice </span>
-                                          <span> <input type="radio" name="Kraków" class="pickupCar Krakow" id=""/> Kraków </span>
-                                          <span> <input type="radio" name="Wrocław" class="pickupCar Wroclaw" id=""/> Wrocław </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Katowice" id="pickupKatowice"/> Katowice </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow"/> Kraków </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw"/> Wrocław </span>
                                       </form>
                                   </div>
                                   <div class="entryFormPart">
                                       <h4>Miejsce zwrotu</h4>
                                       <form action="">
-                                          <span> <input type="radio" name="Katowice" class="returnCar Katowice" id=""/> Katowice </span>
-                                          <span> <input type="radio" name="Kraków" class="returnCar Krakow" id=""/> Kraków </span>
-                                          <span> <input type="radio" name="Wrocław" class="returnCar Wroclaw" id=""/> Wrocław </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Katowice" id="returnKatowice"/> Katowice </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow"/> Kraków </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw"/> Wrocław </span>
                                       </form>
   
                                   </div>
@@ -117,7 +135,9 @@ function CarList() {
               </div>
               <div id="carList">
                   <ul id="cars">
-                      
+                  {cars.map((car) => (
+              <CarItem key={car.id} car={car} /> // Przekazanie danych do CarItem
+            ))}
                   </ul>
               </div>
           </div>

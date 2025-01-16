@@ -1,4 +1,10 @@
 import React from 'react';
+import economyImg from '../styles/economy.png';
+import suvImg from '../styles/suv.png';
+import vanImg from '../styles/van.png';
+import luxuryImg from '../styles/luxury.png';
+
+
 
 function Index() {
   return (
@@ -22,17 +28,17 @@ function Index() {
                                 <div class="entryFormPart">
                                     <h4>Miejsce odbioru</h4>
                                     <form action="">
-                                        <span> <input type="radio" name="Katowice" class="pickupCar Katowice" id=""/> Katowice </span>
-                                        <span> <input type="radio" name="Kraków" class="pickupCar Krakow" id=""/> Kraków </span>
-                                        <span> <input type="radio" name="Wrocław" class="pickupCar Wroclaw" id=""/> Wrocław </span>
+                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Katowice" id="pickupKatowice"/> Katowice </span>
+                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow"/> Kraków </span>
+                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw"/> Wrocław </span>
                                     </form>
                                 </div>
                                 <div class="entryFormPart">
                                     <h4>Miejsce zwrotu</h4>
                                     <form action="">
-                                        <span> <input type="radio" name="Katowice" class="returnCar Katowice" id=""/> Katowice </span>
-                                        <span> <input type="radio" name="Kraków" class="returnCar Krakow" id=""/> Kraków </span>
-                                        <span> <input type="radio" name="Wrocław" class="returnCar Wroclaw" id=""/> Wrocław </span>
+                                        <span> <input type="radio" name="returnLocation" class="returnCar Katowice" id="returnKatowice"/> Katowice </span>
+                                        <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow"/> Kraków </span>
+                                        <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw"/> Wrocław </span>
                                     </form>
 
                                 </div>
@@ -70,7 +76,7 @@ function Index() {
 
                         <a href="" class="carCheck">Zobacz więcej</a>
 
-                        <img src="economy.png" alt="" class="carImg"/>
+                        <img src={economyImg} alt="" class="carImg"/>
                     </div>
 
                     <div class="car">
@@ -82,7 +88,7 @@ function Index() {
 
                         <a href="" class="carCheck">Zobacz więcej</a>
 
-                        <img src="suv.png" alt="" class="carImg"/>
+                        <img src={suvImg} alt="" class="carImg"/>
                     </div>
 
                     <div class="car">
@@ -94,7 +100,7 @@ function Index() {
 
                         <a href="" class="carCheck">Zobacz więcej</a>
 
-                        <img src="van.png" alt="" class="carImg"/>
+                        <img src={vanImg} alt="" class="carImg"/>
                     </div>
 
                     <div class="car">
@@ -106,7 +112,7 @@ function Index() {
 
                         <a href="" class="carCheck">Zobacz więcej</a>
 
-                        <img src="luxury.png" alt="" class="carImg"/>
+                        <img src={luxuryImg} alt="" class="carImg"/>
                     </div>
                 </div>
             </div>

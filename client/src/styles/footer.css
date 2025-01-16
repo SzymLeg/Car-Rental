@@ -4,6 +4,7 @@ footer {
     height: 300px;
     padding: 50px 0;
     background-color: #f5f5f5;
+    overflow: hidden;
 }
 
 footer .resizer .left, 
@@ -11,6 +12,14 @@ footer .resizer .right {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+footer p {
+    margin: 0; 
+    font-size: 14px; 
+    line-height: 1.5; 
+    color: #595959; 
+    text-align: left;
 }
 
 footer iframe {

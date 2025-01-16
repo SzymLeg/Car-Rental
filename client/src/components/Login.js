@@ -45,10 +45,6 @@ const Login = ({ setUser }) => {
       action();
     }
   };
-
-  const handleHomeClick = () => {
-    navigate('/'); // Przenosimy użytkownika na stronę główną
-  };
   
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex do walidacji e-maila
