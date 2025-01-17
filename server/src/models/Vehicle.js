@@ -10,6 +10,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const Vehicle = sequelize.define('Vehicle', {
     brand: { type: DataTypes.STRING, allowNull: false },
     model: { type: DataTypes.STRING, allowNull: false },
+    category: { type: DataTypes.ENUM('economy', 'suv', 'van', 'luxury'), allowNull: false },
     year: { type: DataTypes.INTEGER, allowNull: false },
     license_plate: { type: DataTypes.STRING, unique: true, allowNull: false },
     status: { 
@@ -25,6 +26,8 @@ const Vehicle = sequelize.define('Vehicle', {
     insured: { type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false },
     doors: { type: DataTypes.INTEGER, allowNull: false },
     luggage_capacity: { type: DataTypes.INTEGER, allowNull: false },
+    image: { type: DataTypes.STRING, allowNull: false },
+    localization: { type: DataTypes.STRING, allowNull: false },
 }, {
     timestamps: false, // Wyłączenie createdAt i updatedAt
 });

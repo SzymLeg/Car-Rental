@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import CarItem from './CarItem';
 import axios from 'axios';
+import '../styles/catalog.css';
 
 
 function CarList() {
   const [cars, setCars] = useState([]); // Stan dla listy samochodów
+  const [filteredCars, setFilteredCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Stan ładowania
   const [error, setError] = useState(null); // Stan błędów
+  const [filters, setFilters] = useState({
+    category: [],
+    passengers: [],
+    luggage: [],
+    doors: [],
+    fuel_type: [],
+    dailyPrice: [],
+    transmission: [],
+    deposit: [],
+  }); // Stan dla aktywnych filtrów
 
+  
   // Funkcja do pobrania danych z backendu
   useEffect(() => {
     axios
       .get('http://localhost:5000/api/vehicles') // Zastąp odpowiednim URL swojego API
       .then((response) => {
         setCars(response.data); // Ustawienie danych samochodów
+        setFilteredCars(response.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -21,6 +35,65 @@ function CarList() {
         setIsLoading(false);
       });
   }, []);
+
+  const handleFilterChange = (category, values) => {
+    setFilters((prevFilters) => {
+      const updatedCategory = Array.isArray(values)
+        ? values.reduce((acc, value) => {
+            // Jeśli wartość już istnieje, usuń ją, w przeciwnym razie dodaj
+            return acc.includes(value)
+              ? acc.filter((item) => item !== value)
+              : [...acc, value];
+          }, prevFilters[category])
+        : prevFilters[category].includes(values)
+        ? prevFilters[category].filter((item) => item !== values) // Usuń pojedynczą wartość
+        : [...prevFilters[category], values]; // Dodaj pojedynczą wartość
+  
+      return {
+        ...prevFilters,
+        [category]: updatedCategory,
+      };
+    });
+  };
+
+  // Funkcja filtrująca listę samochodów
+  useEffect(() => {
+    const applyFilters = () => {
+      let filtered = cars;
+
+      // Filtruj według kategorii
+      if (filters.category.length > 0) {
+        filtered = filtered.filter((car) => filters.category.includes(car.category));
+      }
+
+      // Filtruj według liczby pasażerów
+      if (filters.passengers.length > 0) {
+        filtered = filtered.filter((car) => filters.passengers.includes(car.passengers.toString()));
+      }
+
+      if (filters.luggage.length > 0) {
+        filtered = filtered.filter((car) => filters.luggage.includes(car.luggage_capacity.toString()));
+      }
+
+      if (filters.doors.length > 0) {
+        filtered = filtered.filter((car) => filters.doors.includes(car.doors.toString()));
+      }
+
+      if (filters.fuel_type.length > 0) {
+        filtered = filtered.filter((car) => filters.fuel_type.includes(car.fuel_type));
+      }
+
+      if (filters.transmission.length > 0) {
+        filtered = filtered.filter((car) => filters.transmission.includes(car.transmission));
+      }
+
+
+      // Dodaj więcej filtrów w zależności od struktury danych samochodów
+      setFilteredCars(filtered);
+    };
+
+    applyFilters();
+  }, [filters, cars]);
 
     return (
       <section>
@@ -81,14 +154,10 @@ function CarList() {
                       <h2>Filtr</h2>
                       <form action="">
                           <h3>Kategoria pojazdu</h3>
-                          <div><input type="checkbox" class="category small"/> <label>Małe</label></div>
-                          <div><input type="checkbox" class="category medium"/> <label>Średnie</label></div>
-                          <div><input type="checkbox" class="category large"/> <label>Duże</label></div>
-                          <div><input type="checkbox" class="category combi"/> <label>Kombi</label></div>
-                          <div><input type="checkbox" class="category suv"/> <label>SUV</label></div>
-                          <div><input type="checkbox" class="category van"/> <label>Vany</label></div>
-                          <div><input type="checkbox" class="category bus"/> <label>Busy</label></div>
-                          <div><input type="checkbox" class="category premium"/> <label>Premium</label></div>
+                          <div><input type="checkbox" class="category small" onChange={(e) => handleFilterChange('category', 'economy')}/> <label>Miejske</label></div>
+                          <div><input type="checkbox" class="category suv" onChange={(e) => handleFilterChange('category', 'suv')}/> <label>SUV</label></div>
+                          <div><input type="checkbox" class="category bus" onChange={(e) => handleFilterChange('category', 'van')}/> <label>Busy</label></div>
+                          <div><input type="checkbox" class="category premium" onChange={(e) => handleFilterChange('category', 'luxury')}/> <label>Premium</label></div>
 
                           <h3>Liczba pasażerów</h3>
                           <div><input type="checkbox" class="passengers maxThree"/> <label>1 - 3</label></div>
@@ -102,16 +171,15 @@ function CarList() {
                           <div><input type="checkbox" class="passengers threeLuggage"/> <label>3 +</label></div>
 
                           <h3>Liczba drzwi</h3>
-                          <div><input type="checkbox" class="doors noDoors"/> <label>0</label></div>
-                          <div><input type="checkbox" class="doors threeDoors"/> <label>3</label></div>
-                          <div><input type="checkbox" class="doors fiveDoors"/> <label>5</label></div>
-                          <div><input type="checkbox" class="doors customDoors"/> <label>Inna</label></div>
+                          <div><input type="checkbox" class="doors threeDoors" onChange={(e) => handleFilterChange('doors', '3')}/> <label>3</label></div>
+                          <div><input type="checkbox" class="doors fiveDoors" onChange={(e) => handleFilterChange('doors', '5')}/> <label>5</label></div>
+                          <div><input type="checkbox" class="doors customDoors" onChange={(e) => handleFilterChange('doors', '-')}/> <label>Inna</label></div>
 
                           <h3>Typ paliwa</h3>
-                          <div><input type="checkbox" class="fuel petrol"/> <label>Benzyna</label></div>
-                          <div><input type="checkbox" class="fuel diesel"/> <label>Diesel</label></div>
-                          <div><input type="checkbox" class="fuel gas"/> <label>LPG</label></div>
-                          <div><input type="checkbox" class="fuel electric"/> <label>Prąd</label></div>
+                          <div><input type="checkbox" class="fuel petrol" onChange={(e) => handleFilterChange('fuel_type', 'petrol')}/> <label>Benzyna</label></div>
+                          <div><input type="checkbox" class="fuel diesel" onChange={(e) => handleFilterChange('fuel_type', 'diesel')}/> <label>Diesel</label></div>
+                          <div><input type="checkbox" class="fuel hybrid" onChange={(e) => handleFilterChange('fuel_type', 'hybrid')}/> <label>Hybryda</label></div>
+                          <div><input type="checkbox" class="fuel electric" onChange={(e) => handleFilterChange('fuel_type', 'electric')}/> <label>Prąd</label></div>
 
                           <h3>Cena za dzień</h3>
                           <div><input type="checkbox" class="dailyPrice lvOne"/> <label>0zł - 200zł</label></div>
@@ -121,23 +189,25 @@ function CarList() {
                           <div><input type="checkbox" class="dailyPrice lvFive"/> <label>800zł +</label></div>
 
                           <h3>Skrzynia biegów</h3>
-                          <div><input type="checkbox" class="gearbox automatic"/> <label>Automatyczna</label></div>
-                          <div><input type="checkbox" class="gearbox manual"/> <label>Manualna</label></div>
-
-                          <h3>Zasady tankowania</h3>
-                          <div><input type="checkbox" class="fuelRules equal"/> <label>Zwrot z taką samą ilością paliwa</label></div>
+                          <div><input type="checkbox" class="gearbox automatic" onChange={(e) => handleFilterChange('transmission', 'automatic')}/> <label>Automatyczna</label></div>
+                          <div><input type="checkbox" class="gearbox manual" onChange={(e) => handleFilterChange('transmission', 'manual')}/> <label>Manualna</label></div>
 
                           <h3>Kaucja przy odbiorze</h3>
-                          <div><input type="checkbox" class="deposit threeH"/> <label>300zł</label></div>
-                          <div><input type="checkbox" class="deposit sixH"/> <label>600zł</label></div>
+                          <div><input type="checkbox" class="deposit threeH" onChange={(e) => handleFilterChange('category', ['economy','suv','van'])}/> <label>300zł</label></div>
+                          <div><input type="checkbox" class="deposit sixH" onChange={(e) => handleFilterChange('category', 'luxury')}/> <label>600zł</label></div>
                       </form>
                   </div>
               </div>
               <div id="carList">
-                  <ul id="cars">
-                  {cars.map((car) => (
-              <CarItem key={car.id} car={car} /> // Przekazanie danych do CarItem
-            ))}
+              <ul id="cars_catalog">
+              {filteredCars.length > 0 ? (
+              filteredCars.map((car) => (
+                  <CarItem key={car.id} car={car} />
+                ))
+              ) : (
+                <p>Brak dostępnych pojazdów spełniających wybrane kryteria.</p>
+              )}
+              
                   </ul>
               </div>
           </div>

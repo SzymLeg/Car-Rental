@@ -16,13 +16,13 @@ import Index from "./components/Index";
 
 import './styles/about.css';
 import './styles/branches.css';
-import './styles/catalog.css';
+
 import './styles/contact.css';
 import './styles/faq.css';
 import './styles/fleetguide.css';
 import './styles/footer.css';
 import './styles/header.css';
-import './styles/index.css';
+
 import './styles/login.css';
 import './styles/section.css';
 import './styles/style.css';

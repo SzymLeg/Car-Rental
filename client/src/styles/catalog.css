@@ -42,26 +42,33 @@
     border-top: 1px solid lightgray;
 }
 
-#cars {
+#cars_catalog {
     position: relative;
-    display: flex;
+    display: flexz;
     flex-wrap: wrap;
     list-style-type: none;
     margin: 0; 
     padding: 0;
 }
 
-.car {
+.car_item {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 100%;
     margin-bottom: 20px;
     box-shadow: 0px 0px 16px -4px rgba(156, 158, 177, 1);
     border-radius: 20px;
     display: flex;
 }
 
-.carImg,
+.carImg_item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center; /* Wyśrodkowanie w pionie */
+    justify-content: center; /* Opcjonalnie wyśrodkowanie w poziomie */
+}
+
 .carInfo {
     position: relative;
     height: 100%;

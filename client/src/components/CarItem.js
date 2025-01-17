@@ -3,8 +3,8 @@ import carImage from '../styles/carImg.png';
 
 function CarItem({ car }) {
   return (
-<li class="car">
-    <div class="carImg"><img src={carImage} alt="" className="carPhoto" /></div>
+<li class="car_item">
+    <div class="carImg_item"><img src={carImage} alt="" className="carPhoto_item" /></div>
         <div class="carInfo">
             <div class="top">
                 <h2 class="carBrand">{[car.brand, " ", car.model]}</h2>
@@ -13,14 +13,14 @@ function CarItem({ car }) {
                     <li class="gearbox">{car.transmission}</li>
                     <li class="luggage">Walizki: {car.luggage_capacity}</li>
                     <li class="doors">Drzwi: {car.doors}</li>
-                    <li class="fuel">Benzyna</li> 
+                    <li class="fuel">{car.fuel_type}</li> 
                     <li class="location">Katowice</li>
                     <li class="kilometers">Bez limitu kilometrów</li>
                 </ul>
             </div>
         <div class="bottom">
-            <p class="loanDays">Cena za {11} dni</p>
-            <p class="loanPrice">1 999 zł</p>
+            <p class="loanDays">Cena za {1} dni</p>
+            <p class="loanPrice">{car.daily_rate} zł</p>
             <button class="checkOffer">Zobacz ofertę</button>
         </div>
     </div>

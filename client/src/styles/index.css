@@ -5,6 +5,10 @@
     background-color: #003b95;
 }
 
+section {
+    background-color: white;
+}
+
 #entryPanel .resizer span {
     position: relative;
     top: 20%;
@@ -27,14 +31,14 @@
     margin-bottom: 50px;
 }
 
-#entryFormPanel .top,
+#entryFormPanel .top_index,
 #entryFormPanel .bottom {
     position: relative;
     width: 100%;
     height: 75px;
 }
 
-#entryFormPanel .top { background-color: #003b95; }
+#entryFormPanel .top_index { background-color: #003b95; }
 #entryFormPanel .bottom { background-color: white; }
 
 #entryFormBanner {
@@ -118,7 +122,7 @@
 #entryOffer {
     position: relative;
     width: 100%;
-    height: 30vh;
+    height: 40vh;
 }
 
 #entryOffer a {
@@ -146,6 +150,10 @@
     height: 100%;
     text-align: center;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
 .carImg {

@@ -3,6 +3,7 @@ import economyImg from '../styles/economy.png';
 import suvImg from '../styles/suv.png';
 import vanImg from '../styles/van.png';
 import luxuryImg from '../styles/luxury.png';
+import '../styles/index.css';
 
 
 
@@ -19,7 +20,7 @@ function Index() {
         </div>
 
         <div id="entryFormPanel">
-            <div class="top"></div>
+            <div class="top_index"></div>
             <div class="bottom"></div>
             <div id="entryFormBanner">
                 <div class="resizer">
@@ -71,7 +72,7 @@ function Index() {
                         <h2 class="carTitle">Samochód miejski</h2>
 
                         <p class="carDescription">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Kompaktowy i ekonomiczny, idealny do poruszania się po mieście. Niskie spalanie i łatwość parkowania.
                         </p>
 
                         <a href="" class="carCheck">Zobacz więcej</a>
@@ -83,7 +84,7 @@ function Index() {
                         <h2 class="carTitle">SUV</h2>
 
                         <p class="carDescription">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Wszechstronny pojazd o dużej przestrzeni i świetnej trakcji. Doskonały na rodzinne wyjazdy i trudniejsze trasy.
                         </p>
 
                         <a href="" class="carCheck">Zobacz więcej</a>
@@ -92,10 +93,10 @@ function Index() {
                     </div>
 
                     <div class="car">
-                        <h2 class="carTitle">VAN</h2>
+                        <h2 class="carTitle">Bus</h2>
 
                         <p class="carDescription">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Przestronny i wygodny, zaprojektowany z myślą o większych grupach. Idealny na wspólne podróże.
                         </p>
 
                         <a href="" class="carCheck">Zobacz więcej</a>
@@ -107,7 +108,7 @@ function Index() {
                         <h2 class="carTitle">Samochód premium</h2>
 
                         <p class="carDescription">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Luksus i komfort w najlepszym wydaniu. Doskonały wybór na wyjątkowe okazje i biznesowe spotkania.
                         </p>
 
                         <a href="" class="carCheck">Zobacz więcej</a>
