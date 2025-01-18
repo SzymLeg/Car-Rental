@@ -1,0 +1,251 @@
+.finishPayment {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+.isNotLoggedIn p {
+    margin-top: 20px;
+}
+
+#tpayBanner {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to right, #483aac , #192b6d);
+}
+
+.tpayLogo {
+    position: relative;
+    height: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.tpayBelt {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    background-image: linear-gradient(to right, #3ed36d , #8cfbae);
+}
+
+#blikPayment {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #f7f7f9;
+}
+
+#blikPayment label {
+    position: relative;
+    left: 50px;
+    top: 20px;
+}
+
+#blikBox {
+    position: relative;
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    top: 50px;
+    margin: 0 auto;
+}
+
+.blikHandler {
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+.blikLogo {
+    position: relative;
+    height: 40px; top: 20px;
+    left: 50%; transform: translateX(-50%);
+    
+}
+
+.custom_input {
+    top: 20px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: 215px;
+    margin: 0 auto;
+}
+
+.input {
+	font-size: 18px;
+	padding: 16px 16px;
+	width: 100%;
+	outline: none;
+	background: #FFFFFF;
+	color: #000000;
+	border: 1px solid #EB0000;
+	border-radius: 5px;
+	transition: .3s ease;
+    letter-spacing: 20px;
+}
+
+.input:focus {
+	background: #F2F2F2;
+	border: 1px solid #5A7EC7;
+	border-radius: 10px;
+}
+
+.input::placeholder {
+	color: #DDDDDD;
+}
+
+.tpayRules {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.cr-wrapper *,
+.cr-wrapper *::before,
+.cr-wrapper *::after {
+	box-sizing: content-box !important;
+}
+
+.cr-wrapper input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.cr-wrapper span {
+	font-size: 11px;
+}
+
+.cr-wrapper {
+	display: table;
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
+
+.cr-wrapper input[type="checkbox"] ~ .cr-input {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	background: #94A3B8;
+	transition: background 250ms;
+	border: 1px solid #F1F5F9;
+	border-radius: 3px;
+	transform: translate(0, -50%);
+}
+
+.cr-wrapper input[type="radio"] ~ .cr-input {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	background: #94A3B8;
+	transition: background 250ms;
+	border: 1px solid #F1F5F9;
+	border-radius: 20px;
+	transform: translate(0, -50%);
+}
+
+.cr-wrapper input[type="checkbox"] ~ .cr-input::after {
+	content: "";
+	position: absolute;
+	display: none;
+	left: 4px;
+	top: 4px;
+	width: 12px;
+	height: 12px;
+	transition: background 250ms;
+	background-color: #FFFFFF;
+	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.cr-wrapper input[type="radio"] ~ .cr-input::after {
+	content: "";
+	position: absolute;
+	display: none;
+	left: 4px;
+	top: 4px;
+	width: 12px;
+	height: 12px;
+	border-radius: 20px;
+	background: #FFFFFF;
+	transition: background 250ms;
+}
+
+.cr-wrapper input:checked ~ .cr-input::after {
+	display: block;
+}
+
+.cr-wrapper:hover input[type="checkbox"]:not([disabled]) ~ .cr-input,
+.cr-wrapper input[type="checkbox"]:focus ~ .cr-input {
+	background: #E2E8F0;
+	border-color: #64748B;
+}
+
+.cr-wrapper:hover input[type="radio"]:not([disabled]) ~ .cr-input,
+.cr-wrapper input[type="radio"]:focus ~ .cr-input {
+	background: #E2E8F0;
+	border-color: #64748B;
+}
+
+.cr-wrapper input[type="checkbox"]:checked ~ .cr-input {
+	background: #40A9BF;
+	border-color: #2F7D8E;
+}
+
+.cr-wrapper input[type="radio"]:checked ~ .cr-input {
+	background: #40A9BF;
+	border-color: #2F7D8E;
+}
+
+.cr-wrapper input[type="checkbox"]:disabled ~ .cr-input,
+.cr-wrapper input[type="radio"]:disabled ~ .cr-input {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.cr-wrapper input[type="checkbox"]:disabled ~ span,
+.cr-wrapper input[type="radio"]:disabled ~ span {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.cr-wrapper input[type="checkbox"]:disabled ~ .cr-input::after {
+	background: #FFFFFF;
+}
+
+.cr-wrapper input[type="radio"]:disabled ~ .cr-input::after {
+	background: #FFFFFF;
+}
+
+.cr-wrapper:hover input[type="checkbox"]:not([disabled]):checked ~ .cr-input,
+.cr-wrapper input[type="checkbox"]:checked:focus ~ .cr-input {
+	background: #2F7D8E;
+	border-color: #225D69;
+}
+
+.cr-wrapper:hover input[type="radio"]:not([disabled]):checked ~ .cr-input,
+.cr-wrapper input[type="radio"]:checked:focus ~ .cr-input {
+	background: #2F7D8E;
+	border-color: #225D69;
+}
+
+.payButton {
+    position: relative;
+    margin-top: 20px;
+    width: 250px;
+    left: 25px;
+    padding: 16px;
+    border-radius: 50px;
+    border: 0;
+    background-image: linear-gradient(to left, #3ed36d , #8cfbae);
+}

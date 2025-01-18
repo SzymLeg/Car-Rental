@@ -14,6 +14,9 @@ import Footer from './components/Footer';
 import Login from "./components/Login";
 import Index from "./components/Index";
 
+import Rent from "./components/Rent";
+import Payment from "./components/Payment";
+
 import './styles/about.css';
 import './styles/branches.css';
 
@@ -26,6 +29,9 @@ import './styles/header.css';
 import './styles/login.css';
 import './styles/section.css';
 import './styles/style.css';
+
+import './styles/rent.css';
+import './styles/payment.css';
 
 function App() {
   const [user, setUser] = useState(null); // Stan użytkownika

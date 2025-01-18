@@ -1,0 +1,186 @@
+#carLoanPanel {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#aboutCarInfo,
+#aboutLoanInfo {
+    position: relative;
+    min-height: 100px;
+    float: left;
+    top: 20px;
+}
+
+#aboutCarInfo {
+    width: calc(67% - 20px);
+}
+
+#aboutLoanInfo {
+    width: 33%;
+    left: 20px;
+}
+
+.aboutCarInfo {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border-top: 1px solid lightgray;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+.carPhoto {
+    width: 100%;
+    height: 300px;
+    background-image: url(ferrari.jpg);
+    background-size: 100%;
+    border-radius: 20px;
+}
+
+.loanCarPhoto {
+    width: 100%;
+}
+
+.carStats {
+    padding-bottom: 50px;
+}
+
+.aboutCarInfo ul {
+    columns: 3;
+}
+
+ul.aboutCarFeatures li {
+    position: relative;
+    list-style-type: none;
+    background-image: url(./el_features.png);
+    background-repeat: no-repeat;
+    padding: 5px 20px 10px 35px;
+}
+
+ul.aboutCarFeatures li.seats { background-position: 0 0; }
+ul.aboutCarFeatures li.luggage { background-position: 0 -60px; }
+ul.aboutCarFeatures li.doors { background-position: 0 -120px; }
+ul.aboutCarFeatures li.gearbox { background-position: 0 -180px; }
+ul.aboutCarFeatures li.location { background-position: 0 -240px; }
+ul.aboutCarFeatures li.fuel { background-position: 0 -300px; }
+
+.loanAdditional {
+    height: 270px;
+}
+
+.additionalThing {
+    position: relative;
+    width: calc(33% - 20px);
+    height: 120px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    left: 20px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.additionalButtons {
+    position: relative;
+    width: 120px;
+    height: 40px;
+    border: 1px solid black;
+    display: flex;
+    margin: 0 auto;
+}
+
+.additionalButton {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background-color: white;
+    line-height: 40px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+button.additionalButton:hover {
+    background-color: #f1fef0;
+}
+
+#aboutReturnInfo,
+#loanPriceDetails,
+#checkoutBox {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.loanInfoHeading {
+    position: relative;
+    left: 20px;
+    font-weight: 600;
+}
+
+.additionalHeading {
+    position: relative;
+    font-weight: 600;
+    text-align: center;
+}
+
+.additionalSubheading {
+    position: relative;
+    text-align: center;
+    font-weight: 400;
+    padding: 0; margin: 0;
+    color: gray;
+}
+
+.loanInfoDate,
+.loanInfoPlace {
+    position: relative;
+    left: 20px;
+}
+
+.loanPriceDesc,
+.loanPriceCalc {
+    position: relative;
+    height: 20px;
+    left: 20px;
+}
+
+#loanPriceDetails div {
+    display: inline-block
+}
+
+#loanPriceDetails hr {
+    position: relative;
+    margin: 20px;
+    border-top: 1px solid lightgray;
+}
+
+.loanPriceDesc { width: calc(70% - 30px); }
+.loanPriceCalc { width: calc(30% - 15px); }
+
+.finalPrice {
+    font-weight: 600;
+}
+
+.finishLoanButton {
+    position: relative;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background-color: #0be400;
+    transition: 0.3s;
+}
+
+.finishLoanButton:hover, 
+.finishLoanButton:active {
+    background-color: #00b80c;
+}
