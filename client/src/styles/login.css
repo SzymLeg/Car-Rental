@@ -39,11 +39,11 @@
     border-radius: 5px;
     color: white;
     transition: 0.3s;
-    background-color: #006ce4;
+    background-color: #4daf47;
 }
 
 #loginPanel .loginButton:hover, #loginPanel .loginButton:active {
-    background-color: #003b95;
+    background-color: #3f923b;
 }
 
 .error {

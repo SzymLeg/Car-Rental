@@ -9,6 +9,7 @@ const authenticateJWT = require('./middleware/authMiddleware');
 const bodyParser = require('body-parser');
 const messageRoutes = require('./routes/messageRoutes'); // Import tras wiadomości
 const adminRoutes = require('./routes/adminRoutes');
+const reservationRoutes = require('./routes/reservationRoutes');
 
 
 // Middleware i inne konfiguracje
@@ -27,6 +28,8 @@ app.use('/api/auth', authRoutes);  // Ścieżki do logowania i rejestracji
 app.use('/api', messageRoutes);
 
 app.use('/api/admins', adminRoutes);
+
+app.use('/api/reservations', reservationRoutes);
 
 
 // Uruchamianie serwera

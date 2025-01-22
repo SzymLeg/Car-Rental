@@ -1,7 +1,15 @@
 import React from 'react';
 import carImage from '../styles/carImg.png';
+import { useNavigate } from 'react-router-dom';
 
 function CarItem({ car }) {
+  const navigate = useNavigate();
+
+  const handleViewOffer = () => {
+    window.scrollTo(0, 0);
+    navigate(`/rent/${car.id}`);
+  };
+
   return (
 <li class="car_item">
     <div class="carImg_item"><img src={carImage} alt="" className="carPhoto_item" /></div>
@@ -9,19 +17,19 @@ function CarItem({ car }) {
             <div class="top">
                 <h2 class="carBrand">{[car.brand, " ", car.model]}</h2>
                 <ul class="features">
-                    <li class="seats">Miejsca: {car.seats}</li>
+                    <li class="seats">{car.seats}</li>
                     <li class="gearbox">{car.transmission}</li>
-                    <li class="luggage">Walizki: {car.luggage_capacity}</li>
-                    <li class="doors">Drzwi: {car.doors}</li>
+                    <li class="luggage">{car.luggage_capacity}</li>
+                    <li class="doors">{car.doors}</li>
                     <li class="fuel">{car.fuel_type}</li> 
-                    <li class="location">Katowice</li>
+                    <li class="location">{car.localization}</li>
                     <li class="kilometers">Bez limitu kilometrów</li>
                 </ul>
             </div>
         <div class="bottom">
-            <p class="loanDays">Cena za {1} dni</p>
+            <p class="loanDays">Cena za 24h</p>
             <p class="loanPrice">{car.daily_rate} zł</p>
-            <button class="checkOffer">Zobacz ofertę</button>
+            <button class="checkOffer" onClick={handleViewOffer}>Zobacz ofertę</button>
         </div>
     </div>
 </li>

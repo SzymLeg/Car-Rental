@@ -176,11 +176,11 @@ button.additionalButton:hover {
     border: 0;
     border-radius: 5px;
     color: white;
-    background-color: #0be400;
+    background-color: #4daf47;
     transition: 0.3s;
 }
 
 .finishLoanButton:hover, 
 .finishLoanButton:active {
-    background-color: #00b80c;
+    background-color: #3f923b;
 }

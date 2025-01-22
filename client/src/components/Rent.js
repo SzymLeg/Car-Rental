@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 function Rent() {
+    const { id } = useParams();;
+
+    const [carData, setCarData] = useState([]); // Stan na dane auta
+
+    useEffect(() => {
+        // Funkcja do pobrania danych z API
+        const fetchCarData = async () => {
+            
+
+        axios .get(`http://localhost:5000/api/vehicles/${id}`) // Zastąp odpowiednim URL swojego API
+        .then((response) => {
+        setCarData(response.data); // Ustawienie danych samochodów
+     
+  }, []);
+        };
+
+        fetchCarData();
+    }, [id]); // Wykonaj ponownie, jeśli zmieni się id
+    
+
     return (
     <section>
         <div class="resizer">
             <h1>Twoja oferta</h1>
-            <h3>MARKA MODEL SAMOCHODU</h3>
+            <h3>{carData.brand} {carData.model}</h3>
             <div id="carLoanPanel">
                 <div id="aboutCarInfo">
                     <div class="aboutCarInfo carPhoto">
@@ -14,12 +37,12 @@ function Rent() {
                     <div class="aboutCarInfo carStats">
                         <h4 class="loanInfoHeading">Informacje o pojeździe</h4>
                         <ul class="aboutCarFeatures">
-                            <li class="carStatsList seats">XD</li>
-                            <li class="carStatsList gearbox">XD</li>
-                            <li class="carStatsList luggage">XD</li>
-                            <li class="carStatsList doors">XD</li>
-                            <li class="carStatsList fuel">XD</li>
-                            <li class="carStatsList location">XD</li>
+                            <li class="carStatsList seats">{carData.seats}</li>
+                            <li class="carStatsList gearbox">{carData.transmission}</li>
+                            <li class="carStatsList luggage">{carData.luggage_capacity}</li>
+                            <li class="carStatsList doors">{carData.doors}</li>
+                            <li class="carStatsList fuel">{carData.fuel_type}</li>
+                            <li class="carStatsList location">{carData.localization}</li>
                         </ul>
                     </div>
                     <div class="aboutCarInfo loanIncluded">

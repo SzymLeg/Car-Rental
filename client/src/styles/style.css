@@ -32,3 +32,40 @@ button { transition-duration: 0.3s; }
 
 .left { float: left; }
 .right { float: right; }
+
+.scrollToTop {
+    position: fixed; /* Zawsze na ekranie */
+    bottom: 20px;    /* Odległość od dołu */
+    right: 20px;     /* Odległość od prawego brzegu */
+    background-color: #4daf47; /* Kolor tła */
+    color: white;    /* Kolor tekstu */
+    border: none;    /* Bez obramowania */
+    padding: 10px 15px; /* Wewnętrzny odstęp */
+    border-radius: 50%; /* Okrągły przycisk */
+    font-size: 20px;  /* Rozmiar czcionki */
+    cursor: pointer; /* Kursor w kształcie ręki */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Cień */
+    transition: background-color 0.3s ease; /* Płynna zmiana koloru */
+  }
+  
+  .scrollToTop:hover {
+    background-color: #3f923b; /* Zmiana koloru przy najechaniu */
+  }
+  
+  .goToContact {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .goToContact:hover {
+    background-color: #218838;
+  }
