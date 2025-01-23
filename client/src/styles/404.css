@@ -1,0 +1,41 @@
+#errorPage {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.err {
+    color: #5a94c2;
+    font-family: 'Poppins', sans-serif;
+    font-size: 8rem;
+    position: relative;
+    display: inline;
+}
+
+.far {
+    position: relative;
+    font-size: 8rem;
+    display: inline;
+    color: #5a94c2;
+    font-family: fontAwesome;
+}
+
+.msg {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    position: relative;
+    padding: 20px;
+}
+
+.msg a {
+    text-decoration: none;
+    color: #5a94c2;
+}
+  
+.msg a:hover {
+    text-decoration: underline;
+}

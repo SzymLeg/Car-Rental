@@ -1,0 +1,290 @@
+.profileGrid {  
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: 400px 500px 400px;
+    grid-auto-columns: 33.3%;
+    gap: 20px 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "profileCard profileAbout profileAbout"
+      "profileLoans profileLoans profileLoans"
+      "profileRemove . .";
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profileGrid div {
+    background-color: aqua;
+    border-radius: 20px;
+}
+  
+.profileCard { grid-area: profileCard; }
+.profileAbout { grid-area: profileAbout; }
+.profileLoans { grid-area: profileLoans; }
+.profileRemove { grid-area: profileRemove; }
+  
+.profileCardTop,
+.profileCardBottom {
+    position: relative;
+    width: 100%;
+    border: 1px solid red;
+}
+
+.profileCardTop { height: 60%; }
+.profileCardBottom { height: 40%; }
+
+.profileCardTop img {
+    position: relative;
+    height: 80%;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+.profileCardBottom {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.profileTitle,
+.profileSubtitle {
+    position: relative;
+}
+
+.profileTitle {
+    font-size: 28px;
+}
+
+.profileCardBottom button,
+.changePassword button,
+.removeAccount button {
+    position: relative;
+    margin-top: 20px;
+    width: 250px;
+    padding: 16px;
+    border-radius: 50px;
+    border: 0;
+}
+
+.dataAction button {
+    position: relative;
+    padding: 16px;
+    border-radius: 50px;
+    border: 0;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+.profileCardBottom button,
+.changePassword button { background-image: linear-gradient(to left, #3ed36d , #8cfbae); }
+.removeAccount button,
+.dataAction button { background-image: linear-gradient(to left, #d33e3e , #fb8c8c); }
+
+
+.profileInfo {  
+    display: grid;
+    grid-template-columns: 30% 35% 35%;
+    grid-template-rows: 80px 80px 80px 80px 80px;
+    grid-auto-columns: 33.3%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "prName ouName ouName"
+      "prBirthday ouBirthday ouBirthday"
+      "prPhone ouPhone inPhone"
+      "prMail ouMail inMail"
+      "prLicense inLicense inLicense";
+}
+
+.profileInfo div {
+    border: 1px solid red;
+}
+
+.profileInfo div p {
+    position: relative;
+    left: 10px;
+    line-height: 80px;
+}
+
+.profileInfo input {
+    position: relative;
+    padding: 16px;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+  
+.prName { grid-area: prName; }
+.ouName { grid-area: ouName; }
+.prPhone { grid-area: prPhone; }
+.ouPhone { grid-area: ouPhone; }
+.inPhone { grid-area: inPhone; }
+.prMail { grid-area: prMail; }
+.ouMail { grid-area: ouMail; }
+.inMail { grid-area: inMail; }
+.prBirthday { grid-area: prBirthday; }
+.ouBirthday { grid-area: ouBirthday; }
+.prLicense { grid-area: prLicense; }
+.inLicense { grid-area: inLicense; }
+
+.prName p,
+.prPhone p,
+.prMail p,
+.prBirthday p,
+.prLicense p {
+    font-weight: 600;
+}
+  
+.inLicense .cr-wrapper {
+    position: relative;
+    display: inline;
+    line-height: 80px;
+    left: 10px;
+}
+
+.cr-wrapper span {
+    margin-right: 20px;
+}
+
+.titleHistory {  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 80px;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "titleStatus titleData titlePlace titleVehicle titlePrice titleAction";
+}
+  
+.titleStatus { grid-area: titleStatus; }
+.titleData { grid-area: titleData; }
+.titlePlace { grid-area: titlePlace; }
+.titleVehicle { grid-area: titleVehicle; }
+.titlePrice { grid-area: titlePrice; }
+.titleAction { grid-area: titleAction; }
+  
+.titleHistory div,
+.dataHistory div {
+    border: 1px solid red;
+}
+
+.profileLoans {
+    overflow-y: scroll;
+}
+
+.profileLoans::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+.profileLoans::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #DFE9EB;
+}
+  
+.profileLoans::-webkit-scrollbar-track:hover {
+    background-color: #B8C0C2;
+}
+  
+.profileLoans::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+}
+  
+.profileLoans::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #397524;
+}
+  
+.profileLoans::-webkit-scrollbar-thumb:hover {
+    background-color: #62A34B;
+}
+  
+.profileLoans::-webkit-scrollbar-thumb:active {
+    background-color: #62A34B;
+}
+
+.dataHistory {  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 120px;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dataStatus dataData dataPlace dataVehicle dataPrice dataAction";
+  }
+  
+.dataStatus { grid-area: dataStatus; }
+  
+.dataData {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dataDataFrom"
+      "dataDataTo";
+    grid-area: dataData;
+}
+  
+.dataDataFrom { grid-area: dataDataFrom; }
+  
+.dataDataTo { grid-area: dataDataTo; }
+  
+.dataPlace {  
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "dataPlaceFrom"
+      "dataPlaceTo";
+    grid-area: dataPlace;
+}
+  
+.dataPlaceFrom { grid-area: dataPlaceFrom; }
+.dataPlaceTo { grid-area: dataPlaceTo; }
+.dataVehicle { grid-area: dataVehicle; }
+.dataPrice { grid-area: dataPrice; }
+.dataAction { grid-area: dataAction; }
+
+.loanStatus {
+    position: relative;
+    height: 25px;
+    max-width: 50%;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-size: 10px;
+    line-height: 25px;
+    background-image: linear-gradient(to left, #d33e3e , #fb8c8c);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.dataData div,
+.dataPlace div {
+    text-align: center;
+    line-height: 60px;
+}
+
+.dataVehicle,
+.dataPrice {
+    text-align: center;
+    line-height: 120px;
+}
+
+
+.profileRemove h4 {
+    font-weight: 600;
+}
+
+.changePassword,
+.removeAccount {
+    position: relative;
+    width: 100%;
+    border: 1px solid red;
+    text-align: center;
+}
+
+.changePassword { height: 55%; }
+.removeAccount { height: 45%; }
