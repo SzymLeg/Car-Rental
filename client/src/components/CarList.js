@@ -8,14 +8,27 @@ import { useLocation } from 'react-router-dom';
 function CarList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const today = new Date().toISOString().split('T')[0];
+  const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const now = new Date();
+  const nowTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
 
-  const pickupLocation = queryParams.get('pickupLocation');
-  const returnLocation = queryParams.get('returnLocation');
-  const pickupDate = queryParams.get('pickupDate');
-  const pickupTime = queryParams.get('pickupTime');
-  const returnDate = queryParams.get('returnDate');
-  const returnTime = queryParams.get('returnTime');
-  const category_link = queryParams.get('category') || "default";;
+
+  const initialPickupLocation = queryParams.get('pickupLocation') || 'Katowice';
+  const initialReturnLocation = queryParams.get('returnLocation') || 'Katowice';
+  const initialPickupDate = queryParams.get('pickupDate') || today;
+  const initialPickupTime = queryParams.get('pickupTime') || nowTime;
+  const initialReturnDate = queryParams.get('returnDate') || tomorrow;
+  const initialReturnTime = queryParams.get('returnTime') || nowTime;
+  const initialCategoryLink = queryParams.get('category') || "default";
+
+  const [pickupLocation, setPickupLocation] = useState(initialPickupLocation);
+  const [returnLocation, setReturnLocation] = useState(initialReturnLocation);
+  const [pickupDate, setPickupDate] = useState(initialPickupDate);
+  const [pickupTime, setPickupTime] = useState(initialPickupTime);
+  const [returnDate, setReturnDate] = useState(initialReturnDate);
+  const [returnTime, setReturnTime] = useState(initialReturnTime);
 
   const [cars, setCars] = useState([]); // Stan dla listy samochodów
   const [filteredCars, setFilteredCars] = useState([]);
@@ -31,14 +44,14 @@ function CarList() {
     dailyPrice: [],
     transmission: [],
     deposit: [],
-    category_link: [category_link],
+    category_link: [initialCategoryLink],
   }); // Stan dla aktywnych filtrów
 
   
   // Funkcja do pobrania danych z backendu
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/vehicles') // Zastąp odpowiednim URL swojego API
+      .get(`http://localhost:5000/api/vehicles/available/${pickupLocation}`) // Zastąp odpowiednim URL swojego API
       .then((response) => {
         setCars(response.data); // Ustawienie danych samochodów
         setFilteredCars(response.data);
@@ -48,7 +61,7 @@ function CarList() {
         setError('Nie udało się załadować samochodów. Spróbuj ponownie później.');
         setIsLoading(false);
       });
-  }, []);
+  }, [pickupLocation]);
 
   const handleFilterChange = (category, values) => {
     setFilters((prevFilters) => {
@@ -83,7 +96,37 @@ function CarList() {
     });
   };
   
-  
+  const handleSearch = () => {
+    if (!pickupLocation) {
+      alert("Proszę wybrać miejsce odbioru!");
+      return;
+    }
+    if (!returnLocation) {
+      alert("Proszę wybrać miejsce zwrotu!");
+      return;
+    }
+    if (!pickupDate) {
+      alert("Proszę wybrać datę odbioru!");
+      return;
+    }
+    if (!pickupTime) {
+      alert("Proszę wybrać godzinę odbioru!");
+      return;
+    }
+    if (!returnDate) {
+      alert("Proszę wybrać datę zwrotu!");
+      return;
+    }
+    if (!returnTime) {
+      alert("Proszę wybrać godzinę zwrotu!");
+      return;
+    }
+    let results = cars;
+    results = results.filter((car) => !pickupLocation || car.localization === pickupLocation);
+        // Filtruj według miejsca odbioru});
+    setFilteredCars(results)
+    setCarCount(results.length);
+  };
 
   // Funkcja filtrująca listę samochodów
   useEffect(() => {
@@ -148,36 +191,36 @@ function CarList() {
                                   <div class="entryFormPart">
                                       <h4>Miejsce odbioru</h4>
                                       <form action="">
-                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Katowice" id="pickupKatowice" defaultChecked={pickupLocation === "Katowice"}/> Katowice </span>
-                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow" defaultChecked={pickupLocation === "Krakow"}/> Kraków </span>
-                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw" defaultChecked={pickupLocation === "Wroclaw"}/> Wrocław </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Katowice" id="pickupKatowice" defaultChecked={pickupLocation === "Katowice"} onChange={() => setPickupLocation('Katowice')}/> Katowice </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow" defaultChecked={pickupLocation === "Kraków"} onChange={() => setPickupLocation('Kraków')}/> Kraków </span>
+                                      <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw" defaultChecked={pickupLocation === "Wrocław"} onChange={() => setPickupLocation('Wrocław')}/> Wrocław </span>
                                       </form>
                                   </div>
                                   <div class="entryFormPart">
                                       <h4>Miejsce zwrotu</h4>
                                       <form action="">
-                                      <span> <input type="radio" name="returnLocation" class="returnCar Katowice" id="returnKatowice" defaultChecked={returnLocation === "Katowice"}/> Katowice </span>
-                                      <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow" defaultChecked={returnLocation === "Krakow"}/> Kraków </span>
-                                      <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw" defaultChecked={returnLocation === "Wroclaw"}/> Wrocław </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Katowice" id="returnKatowice" defaultChecked={returnLocation === "Katowice"} onChange={() => setReturnLocation('Katowice')}/> Katowice </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow" defaultChecked={returnLocation === "Kraków"} onChange={() => setReturnLocation('Kraków')}/> Kraków </span>
+                                      <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw" defaultChecked={returnLocation === "Wrocław"} onChange={() => setReturnLocation('Wrocław')}/> Wrocław </span>
                                       </form>
   
                                   </div>
                                   <div class="entryFormPart">
                                       <h4>Data i godzina odbioru</h4>
                                       <form action="">
-                                          <span><input type="date" name="" class="pickupCar date" id="" defaultValue={pickupDate}/></span>
-                                          <span><input type="time" name="" class="pickupCar time "id="" defaultValue={pickupTime}/></span>
+                                          <span><input type="date" name="" class="pickupCar date" id="" defaultValue={pickupDate} min={today} onChange={(e) => setPickupDate(e.target.value)}/></span>
+                                          <span><input type="time" name="" class="pickupCar time "id="" defaultValue={pickupTime} onChange={(e) => setPickupTime(e.target.value)}/></span>
                                       </form>
                                   </div>
                                   <div class="entryFormPart">
                                       <h4>Data i godzina zwrotu</h4>
                                       <form action="">
-                                          <span><input type="date" name="" class="returnCar date" id="" defaultValue={returnDate}/></span>
-                                          <span><input type="time" name="" class="returnCar time "id="" defaultValue={returnTime}/></span>
+                                          <span><input type="date" name="" class="returnCar date" id="" defaultValue={returnDate} min={pickupDate || today} onChange={(e) => setReturnDate(e.target.value)}/></span>
+                                          <span><input type="time" name="" class="returnCar time "id="" defaultValue={returnTime} onChange={(e) => setReturnTime(e.target.value)}/></span>
                                       </form>
                                   </div>
                                   <div class="entryFormButton">
-                                      <button id="" class="formSearchButton">Szukaj</button>
+                                      <button id="" class="formSearchButton" onClick={handleSearch}>Szukaj</button>
                                   </div>
                           </div>
                       </div>
@@ -239,7 +282,7 @@ function CarList() {
               <ul id="cars_catalog">
               {filteredCars.length > 0 ? (
               filteredCars.map((car) => (
-                  <CarItem key={car.id} car={car} />
+                  <CarItem key={car.id} car={car} pickupLocation={pickupLocation} returnLocation={returnLocation} pickupDate={pickupDate} pickupTime={pickupTime} returnDate={returnDate} returnTime={returnTime}/>
                 ))
               ) : (
                 <p>Brak dostępnych pojazdów spełniających wybrane kryteria.</p>

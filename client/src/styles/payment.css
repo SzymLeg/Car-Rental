@@ -249,3 +249,15 @@
     border: 0;
     background-image: linear-gradient(to left, #3ed36d , #8cfbae);
 }
+
+.payButton:hover {
+    background-image: linear-gradient(to right, #2abf57, #76e597);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.payButton:active {
+    background-image: linear-gradient(to right, #1c8b3e, #62c583);
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}

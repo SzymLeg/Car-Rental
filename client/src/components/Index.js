@@ -80,16 +80,16 @@ function Index() {
                                     <h4>Miejsce odbioru</h4>
                                     <form action="">
                                         <span> <input type="radio" name="pickupLocation" class="pickupCar Katowice" id="pickupKatowice" onChange={() => setPickupLocation('Katowice')} /> Katowice </span>
-                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow" onChange={() => setPickupLocation('Krakow')}/> Kraków </span>
-                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw" onChange={() => setPickupLocation('Wroclaw')}/> Wrocław </span>
+                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Krakow" id="pickupKrakow" onChange={() => setPickupLocation('Kraków')}/> Kraków </span>
+                                        <span> <input type="radio" name="pickupLocation" class="pickupCar Wroclaw" id="pickupWroclaw" onChange={() => setPickupLocation('Wrocław')}/> Wrocław </span>
                                     </form>
                                 </div>
                                 <div class="entryFormPart">
                                     <h4>Miejsce zwrotu</h4>
                                     <form action="">
                                         <span> <input type="radio" name="returnLocation" class="returnCar Katowice" id="returnKatowice" onChange={() => setReturnLocation('Katowice')}/> Katowice </span>
-                                        <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow" onChange={() => setReturnLocation('Krakow')}/> Kraków </span>
-                                        <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw" onChange={() => setReturnLocation('Wroclaw')}/> Wrocław </span>
+                                        <span> <input type="radio" name="returnLocation" class="returnCar Krakow" id="returnKrakow" onChange={() => setReturnLocation('Kraków')}/> Kraków </span>
+                                        <span> <input type="radio" name="returnLocation" class="returnCar Wroclaw" id="returnWroclaw" onChange={() => setReturnLocation('Wrocław')}/> Wrocław </span>
                                     </form>
 
                                 </div>

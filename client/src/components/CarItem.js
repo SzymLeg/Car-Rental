@@ -1,13 +1,13 @@
 import React from 'react';
-import carImage from '../styles/carImg.png';
+import carImage from '../styles/tesla-model-3.png';
 import { useNavigate } from 'react-router-dom';
 
-function CarItem({ car }) {
+function CarItem({ car, pickupLocation, returnLocation, pickupDate, pickupTime, returnDate, returnTime }) {
   const navigate = useNavigate();
 
   const handleViewOffer = () => {
     window.scrollTo(0, 0);
-    navigate(`/rent/${car.id}`);
+    navigate(`/rent/${car.id}?pickupLocation=${pickupLocation}&returnLocation=${returnLocation}&pickupDate=${pickupDate}&pickupTime=${pickupTime}&returnDate=${returnDate}&returnTime=${returnTime}`);
   };
 
   return (

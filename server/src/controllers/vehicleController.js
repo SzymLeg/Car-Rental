@@ -9,6 +9,24 @@ exports.getAllVehicles = async (req, res) => {
     }
 };
 
+exports.getAvailableVehicles = async (req, res) => {
+    try {
+        const { location } = req.params;
+      // Pobierz tylko pojazdy z `status = 'available'`
+      const vehicles = await Vehicle.findAll({
+        where: {
+          status: 'available',
+          localization: location,
+        },
+      });
+      res.status(200).json(vehicles);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Błąd serwera.' });
+    }
+  };
+  
+
 exports.getVehicleById = async (req, res) => {
     try {
         const { id } = req.params;

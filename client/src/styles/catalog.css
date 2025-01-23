@@ -94,6 +94,7 @@
 
 ul.features {
     padding-left: 10px;
+    
 }
 
 ul.features li {
@@ -105,11 +106,11 @@ ul.features li {
     float: left;
 }
 
-ul.features li.seats { background-position: 0 0; }
-ul.features li.luggage { background-position: 0 -60px; }
-ul.features li.doors { background-position: 0 -120px; }
-ul.features li.gearbox { background-position: 0 -180px; }
-ul.features li.location { background-position: 0 -240px; }
+ul.features li.seats { background-position: 0 0;}
+ul.features li.luggage { background-position: 0 -60px;}
+ul.features li.doors { background-position: 0 -120px;}
+ul.features li.gearbox { background-position: 0 -180px;}
+ul.features li.location { background-position: 0 -240px;}
 ul.features li.fuel { background-position: 0 -300px; }
 ul.features li.kilometers { background-position: 0 -360px; }
 
@@ -121,8 +122,36 @@ ul.features li.kilometers { background-position: 0 -360px; }
     display: block;
     margin-right: 10px;
     margin-left: auto;
+    
+    
+    
+}
+
+.loanPrice {
+    font-weight: 600;
 }
 
 input[type="checkbox"] {
     margin-bottom: 10px;
+}
+
+.checkOffer {
+    position: relative;
+    text-align: right;
+    display: block;
+    margin-right: 10px;
+    margin-left: auto;
+    margin-top: 15px;
+    padding: 10px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s;
+    background-color: #4daf47;
+    
+}
+
+.checkOffer:hover,
+.checkOffer:active {
+    background-color: #3f923b;
 }
