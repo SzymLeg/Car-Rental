@@ -30,9 +30,9 @@ function Payment() {
                 status: 'rented'});
                 if (updateVehicleResponse.status === 200) {
                     // Potwierdzenie rezerwacji
-                alert('Rezerwacja została zapisana!');
+                
                 // Przekierowanie na stronę potwierdzenia
-                window.location.href = '/';
+                window.location.href = '/success';
                 }
                 
             }

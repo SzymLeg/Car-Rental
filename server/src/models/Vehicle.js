@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
+const Reservation = require('./Reservation');
 
 // Inicjalizacja Sequelize z danymi połączenia z MySQL
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -31,6 +32,9 @@ const Vehicle = sequelize.define('Vehicle', {
 }, {
     timestamps: false, // Wyłączenie createdAt i updatedAt
 });
+
+Reservation.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
+Vehicle.hasMany(Reservation, { foreignKey: 'vehicle_id' });
 
 // Synchronizacja modelu z bazą danych
 sequelize.sync()

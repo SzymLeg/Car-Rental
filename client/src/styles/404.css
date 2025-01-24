@@ -22,6 +22,11 @@
     display: inline;
     color: #5a94c2;
     font-family: fontAwesome;
+    
+}
+
+.icon {
+    font-size: 8rem; /* Rozmiar ikony */
 }
 
 .msg {

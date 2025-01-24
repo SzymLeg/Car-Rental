@@ -9,7 +9,7 @@ function Header({ user, setUser }) {
       navigate("/login");
     } // Przenosimy użytkownika do strony logowania
     else {
-      navigate("/user-panel");
+      navigate("/profile");
     }
   };
 

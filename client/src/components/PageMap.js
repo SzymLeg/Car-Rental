@@ -3,8 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 
-function PageMap() {
+function PageMap({ user, setUser }) {
   const location = useLocation();
+
+  const isLoggedIn = () => {
+    if (user){
+    return true;}
+    else {
+    return false;
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);  // Przewija stronę na górę, gdy zmienia się lokalizacja
@@ -19,7 +27,7 @@ function PageMap() {
                 <Link to="/contact" className="maping">Skontaktuj się z Obsługą Klienta</Link>
                 <Link to="/about" className="maping">O naszej wypożyczalni</Link>
                 <Link to="/faq" className="maping">Najczęściej zadawane pytania</Link>
-                <Link to="/user-panel" className="maping">Panel użytkownika</Link>
+                <Link to={isLoggedIn() ? "/profile" : "/login"} className="maping">Panel użytkownika</Link>
                 <Link to="/admin-login" className="maping">Panel administratora</Link>
             </p>
         </div>

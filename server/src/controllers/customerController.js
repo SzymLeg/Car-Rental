@@ -52,13 +52,13 @@ exports.updateCustomer = async (req, res) => {
       return res.status(404).json({ message: 'Klient nie znaleziony' });
     }
 
-    customer.first_name = first_name;
-    customer.last_name = last_name;
-    customer.address = address;
-    customer.email = email;
-    customer.phone_number = phone_number;
-    customer.birthdate = birthdate;
-    customer.permissions = permissions;
+    if (first_name !== undefined) customer.first_name = first_name;
+    if (last_name !== undefined) customer.last_name = last_name;
+    if (address !== undefined) customer.address = address;
+    if (email !== undefined) customer.email = email;
+    if (phone_number !== undefined) customer.phone_number = phone_number;
+    if (birthdate !== undefined) customer.birthdate = birthdate;
+    if (permissions !== undefined) customer.permissions = permissions;
 
     await customer.save();
 

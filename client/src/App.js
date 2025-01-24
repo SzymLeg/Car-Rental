@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+
+
 import About from './components/About';
 import AdminLogin from './components/AdminLogin';
 import Branches from './components/Branches';
@@ -14,6 +18,10 @@ import Login from "./components/Login";
 import Index from "./components/Index";
 import Rent from "./components/Rent";
 import Payment from "./components/Payment";
+import Error from "./components/e404";
+import Success from "./components/Success";
+import Profile from "./components/Profile";
+
 
 import './styles/about.css';
 import './styles/branches.css';
@@ -27,6 +35,9 @@ import './styles/section.css';
 import './styles/style.css';
 import './styles/rent.css';
 import './styles/payment.css';
+import './styles/404.css';
+import './styles/successfull.css';
+import './styles/profile.css';
 
 function App() {
   const [user, setUser] = useState(null); // Stan użytkownika
@@ -59,23 +70,26 @@ function App() {
       <div>
         {/* Warunkowe renderowanie Header i Footer */}
         <Routes>
-          <Route path="/" element={<><Header user={user} setUser={setUser}/><Index/><PageMap/><Footer/><Copyright /></>} />
-          <Route path="/catalog" element={<><Header user={user} setUser={setUser}/><CarList /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/login" element={<><Header user={user} setUser={setUser}/> <Login setUser={setUser}/><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/about" element={<><Header user={user} setUser={setUser}/><About /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/faq" element={<><Header user={user} setUser={setUser}/><Faq /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/admin-login" element={<><Header user={user} setUser={setUser}/><AdminLogin /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/branches" element={<><Header user={user} setUser={setUser}/><Branches /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/contact" element={<><Header user={user} setUser={setUser}/><Contact /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/rent/:id" element={<><Header user={user} setUser={setUser}/><Rent /><PageMap/><Footer /><Copyright /></>} />
-          <Route path="/payment" element={<><Header user={user} setUser={setUser}/><Payment /><PageMap/><Footer /><Copyright /></>} />
+          <Route path="/" element={<><Header user={user} setUser={setUser}/><Index/><PageMap user={user} setUser={setUser}/><Footer/><Copyright /></>} />
+          <Route path="/catalog" element={<><Header user={user} setUser={setUser}/><CarList /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/login" element={<><Header user={user} setUser={setUser}/> <Login setUser={setUser}/><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/about" element={<><Header user={user} setUser={setUser}/><About /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/faq" element={<><Header user={user} setUser={setUser}/><Faq /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/admin-login" element={<><Header user={user} setUser={setUser}/><AdminLogin /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/branches" element={<><Header user={user} setUser={setUser}/><Branches /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/contact" element={<><Header user={user} setUser={setUser}/><Contact /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/rent/:id" element={<><Header user={user} setUser={setUser}/><Rent /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/payment" element={<><Header user={user} setUser={setUser}/><Payment /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="*" element={<><Header user={user} setUser={setUser}/><Error/><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/success" element={<><Header user={user} setUser={setUser}/><Success /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/profile" element={<><Header user={user} setUser={setUser}/><Profile user={user} setUser={setUser}/><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
         </Routes>
       </div>
       {/* Przycisk przewijania na górę */}
       <button className="scrollToTop" onClick={scrollToTop}>↑</button>
       {/* Przycisk przenoszący na stronę /contact po lewej stronie */}
       <Link to="/contact">
-        <button className="goToContact">Chat</button>
+        <button className="goToContact"><FontAwesomeIcon icon={faComment} /> Chat</button>
       </Link>
       
     </Router>

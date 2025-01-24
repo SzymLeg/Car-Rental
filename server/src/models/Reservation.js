@@ -38,9 +38,9 @@ const Reservation = sequelize.define('Reservation', {
     start_date: { type: DataTypes.DATEONLY, allowNull: false },
     end_date: { type: DataTypes.DATEONLY, allowNull: false },
     status: { 
-        type: DataTypes.ENUM('active', 'completed', 'cancelled'), 
+        type: DataTypes.ENUM('Zarezerwowane', 'Wynajmowane', 'Zakończone', 'Anulowane'), 
         allowNull: false,
-        defaultValue: 'active',
+        defaultValue: 'Zarezerwowane',
     },
     pickup_location: { type: DataTypes.STRING, allowNull: false }, // Miejsce odbioru
     return_location: { type: DataTypes.STRING, allowNull: false }, // Miejsce zwrotu

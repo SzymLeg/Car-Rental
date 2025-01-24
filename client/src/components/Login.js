@@ -105,7 +105,7 @@ const Login = ({ setUser }) => {
           };
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
           setUser(userData);
-          navigate("/");
+          navigate("/profile");
         } else {
           setError("Błędne dane logowania");
         }
@@ -136,8 +136,8 @@ const Login = ({ setUser }) => {
           // Ustawienie danych użytkownika w stanie aplikacji
           setUser(userData);
   
-          // Przekierowanie na stronę główną
-          navigate("/");
+          // Przekierowanie na profil
+          navigate("/profile");
   
           // Komunikat po rejestracji
         } else {
