@@ -120,6 +120,7 @@ return (
                         <div class="prMail"> <p>Adres e-mail</p> </div>
                         <div class="ouMail"> <p>{customerData.email}</p> </div>
                         <div class="inMail"> <input type="email" name="" id=""/></div>
+						/*
                         <div class="prLicense"> <p>Uprawnienia</p> </div>
                         <div class="inLicense"> 
                             <label class="cr-wrapper">
@@ -143,6 +144,7 @@ return (
                                 <div class="cr-input"></div> <span>T</span>
                             </label>
                         </div>
+						*/
                       </div>
                 </div>
 

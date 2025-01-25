@@ -13,21 +13,30 @@
     margin-bottom: 20px;
 }
 
-.profileGrid div {
-    background-color: aqua;
+.profileGrid .profileCard,
+.profileGrid .profileAbout,
+.profileGrid .profileLoans,
+.profileGrid .profileRemove {
     border-radius: 20px;
 }
   
-.profileCard { grid-area: profileCard; }
-.profileAbout { grid-area: profileAbout; }
-.profileLoans { grid-area: profileLoans; }
-.profileRemove { grid-area: profileRemove; }
-  
+.profileCard {  grid-area: profileCard;
+    border: 1px solid lightgray; }
+.profileAbout { grid-area: profileAbout;
+    border: 1px solid lightgray; }
+.profileLoans { grid-area: profileLoans;
+    border: 1px solid lightgray; }
+.profileRemove { grid-area: profileRemove;
+    border: 1px solid lightgray; }
+
 .profileCardTop,
 .profileCardBottom {
     position: relative;
     width: 100%;
-    border: 1px solid red;
+}
+
+.profileCardBottom {
+    border-top: 1px solid lightgray;
 }
 
 .profileCardTop { height: 60%; }
@@ -84,7 +93,7 @@
 .profileInfo {  
     display: grid;
     grid-template-columns: 30% 35% 35%;
-    grid-template-rows: 80px 80px 80px 80px 80px;
+    grid-template-rows: 100px 100px 100px 100px 0px;
     grid-auto-columns: 33.3%;
     gap: 0px 0px;
     grid-auto-flow: row;
@@ -97,13 +106,17 @@
 }
 
 .profileInfo div {
-    border: 1px solid red;
+    border-bottom: 1px solid lightgray;
+}
+
+.prMail, .ouMail, .inMail {
+    border: 0px solid lightgray !important;
 }
 
 .profileInfo div p {
     position: relative;
-    left: 10px;
-    line-height: 80px;
+    left: 20px;
+    line-height: 100px;
 }
 
 .profileInfo input {
@@ -153,6 +166,7 @@
     grid-auto-flow: row;
     grid-template-areas:
       "titleStatus titleData titlePlace titleVehicle titlePrice titleAction";
+    border-bottom: 1px solid lightgray;
 }
   
 .titleStatus { grid-area: titleStatus; }
@@ -161,10 +175,12 @@
 .titleVehicle { grid-area: titleVehicle; }
 .titlePrice { grid-area: titlePrice; }
 .titleAction { grid-area: titleAction; }
-  
-.titleHistory div,
-.dataHistory div {
-    border: 1px solid red;
+
+.titleHistory div {
+    text-align: center;
+    font-weight: 600;
+    line-height: 80px;
+    font-size: 16px;
 }
 
 .profileLoans {
@@ -210,6 +226,7 @@
     grid-auto-flow: row;
     grid-template-areas:
       "dataStatus dataData dataPlace dataVehicle dataPrice dataAction";
+    border-bottom: 1px solid lightgray;
   }
   
 .dataStatus { grid-area: dataStatus; }
@@ -256,10 +273,14 @@
     color: white;
     font-size: 10px;
     line-height: 25px;
-    background-image: linear-gradient(to left, #d33e3e , #fb8c8c);
     font-weight: 500;
     text-transform: uppercase;
+    border-radius: 20px;
 }
+
+.pastLoan { background-image: linear-gradient(to left, #d33e3e , #fb8c8c); }
+.activeLoan { background-image: linear-gradient(to left, #3ed36d , #8cfbae); }
+.futureLoan { background-image: linear-gradient(to left, #3e83d3 , #8cbcfb); }
 
 .dataData div,
 .dataPlace div {
@@ -282,9 +303,8 @@
 .removeAccount {
     position: relative;
     width: 100%;
-    border: 1px solid red;
     text-align: center;
 }
 
-.changePassword { height: 55%; }
+.changePassword { height: 55%; border-bottom: 1px solid lightgray;}
 .removeAccount { height: 45%; }
