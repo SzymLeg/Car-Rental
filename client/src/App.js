@@ -24,6 +24,7 @@ import Payment from "./components/Payment";
 import Error from "./components/e404";
 import Success from "./components/Success";
 import Profile from "./components/Profile";
+import Profile from "./components/AdminProfile";
 
 
 import './styles/about.css';
@@ -41,6 +42,7 @@ import './styles/payment.css';
 import './styles/404.css';
 import './styles/successfull.css';
 import './styles/profile.css';
+import './styles/adminprofile.css';
 
 function App() {
   const [user, setUser] = useState(null); // Stan użytkownika
