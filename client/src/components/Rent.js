@@ -30,6 +30,8 @@ const handleClickContinue = () => {
         vehicle_id: carData.id,
         start_date: PickupDate,
         end_date: ReturnDate,
+        pickup_time: PickupTime,
+        return_time: ReturnTime,
         status: 'Zarezerwowane',
         pickup_location: PickupLocation,
         return_location: ReturnLocation,

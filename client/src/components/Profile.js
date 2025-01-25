@@ -7,6 +7,7 @@ function Profile({ user, setUser }) {
     const [loading, setLoading] = useState(true); // Stan ładowania
     const [error, setError] = useState(null); // Stan błędu
     const [reservations, setReservations] = useState([]);
+    const [showDialog, setShowDialog] = useState(false);
 
 
 
@@ -27,12 +28,21 @@ function Profile({ user, setUser }) {
 
                 // Pobierz rezerwacje użytkownika
                 const reservationsResponse = await axios.get(`http://localhost:5000/api/reservations/user/${userName.id}`);
-                setReservations(reservationsResponse.data);
+                if (reservationsResponse.data.length === 0) {
+                    // Brak rezerwacji - ustaw pustą tablicę, ale nie zgłaszaj błędu
+                    setReservations([]);
+                } else {
+                    setReservations(reservationsResponse.data);
+                }
 
                 setLoading(false);
             } catch (err) {
-                setError('Wystąpił błąd podczas pobierania danych.');
-                console.error(err);
+                if (err.response && err.response.status === 404) {
+                    // Brak rezerwacji - nie ustawiaj błędu, po prostu pusta tablica
+                    setReservations([]);
+                } else {
+                    throw err; // Przekaż inne błędy dalej
+                }
                 setLoading(false);
             }
         };
@@ -43,11 +53,15 @@ function Profile({ user, setUser }) {
     if (loading) return true;
     if (error) return <div>Błąd: {error}</div>;
 
-    const updateReservationStatus = async (reservationId, newStatus) => {
+    const updateReservationStatus = async (reservationId, newStatus, vehicleId) => {
         try {
           setLoading(true);
           await axios.put(`http://localhost:5000/api/reservations/${reservationId}`, { status: newStatus });
           // Po udanej zmianie statusu, odśwież dane rezerwacji
+          if (newStatus === "Anulowane") {
+            // Jeśli rezerwacja została anulowana, zmień status pojazdu na "available"
+            await axios.put(`http://localhost:5000/api/vehicles/${vehicleId}`, { status: "available" });
+        }
           
           window.location.reload();
           alert('Status rezerwacji został zmieniony!');
@@ -58,6 +72,22 @@ function Profile({ user, setUser }) {
           setLoading(false);
         }
       };
+
+      const handleDeleteAccount = async () => {
+       
+        try {
+          setLoading(true);
+          await axios.delete(`http://localhost:5000/api/customers/${customerData.id}`);
+          alert('Konto zostało usunięte!');
+          localStorage.removeItem('userName');
+          setUser(null);
+          window.location.href = '/';
+        } catch (err) {
+          setError('Wystąpił błąd podczas usuwania konta');
+          console.error(err);
+          setLoading(false);
+        }
+      }
     
 
 return (
@@ -126,7 +156,10 @@ return (
                         <div class="titleAction">Akcja</div>
                     </div>
 
-                    {reservations.map((reservation) => (
+                    {reservations.length === 0 ? (
+                        <p>Nie masz jeszcze żadnych rezerwacji.</p>
+                    ) : (
+                    reservations.map((reservation) => (
                     <div class="dataHistory">
                         <div class="dataStatus">
                             <div class="loanStatus"> {reservation.status} </div>
@@ -141,9 +174,10 @@ return (
                         </div>
                         <div class="dataVehicle"> <p>{reservation.Vehicle.brand} {reservation.Vehicle.model}</p> </div>
                         <div class="dataPrice"> <p>{reservation.amount} PLN</p> </div>
-                        <div class="dataAction"> <button onClick={() => updateReservationStatus(reservation.id, 'Anulowane')}>Anuluj rezerwację</button> </div>
+                        <div class="dataAction"> <button onClick={() => updateReservationStatus(reservation.id, 'Anulowane', reservation.vehicle_id)}>Anuluj rezerwację</button> </div>
                     </div>
-                    ))}
+                    ))
+                    )}
                 </div>
 
                 <div class="profileRemove">
@@ -159,7 +193,14 @@ return (
                     <div class="removeAccount">
                         <h4>Usuń konto</h4>
                         <p>Twoje konto i dane osobowe zostaną usunięte z naszego systemu. Tej akcji nie można cofnąć.</p>
-                        <button>Usuń konto</button>
+                        <button onClick={() => setShowDialog(true)}>Usuń konto</button>
+                        {showDialog && (
+                            <div className="dialog">
+                                <p>Czy na pewno chcesz usunąć swoje konto? Tej akcji nie można cofnąć.</p>
+                                <button onClick={handleDeleteAccount}>Tak, usuń</button>
+                                <button onClick={() => setShowDialog(false)}>Anuluj</button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
