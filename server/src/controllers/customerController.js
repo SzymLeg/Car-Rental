@@ -1,4 +1,5 @@
 const Customer = require('../models/Customer');
+const bcrypt = require('bcrypt');
 
 // Pobieranie wszystkich klientów
 exports.getAllCustomers = async (req, res) => {
@@ -84,5 +85,33 @@ exports.deleteCustomer = async (req, res) => {
   } catch (error) {
     console.error('Error deleting customer:', error);
     res.status(500).json({ message: 'Błąd podczas usuwania klienta' });
+  }
+};
+
+// Funkcja zmiany hasła
+exports.changePassword = async (req, res) => {
+  const { id } = req.params;
+  const { new_password } = req.body;
+
+  try {
+    // Sprawdzenie, czy klient istnieje w bazie danych
+    const customer = await Customer.findByPk(id);
+    if (!customer) {
+      return res.status(404).json({ message: 'Klient nie znaleziony' });
+    }
+
+    // Haszowanie nowego hasła
+    const hashedPassword = await bcrypt.hash(new_password, 10); // 10 to koszt haszowania (im wyższa liczba, tym trudniejsze do złamania)
+
+    // Zaktualizowanie hasła
+    customer.password = hashedPassword;
+
+    // Zapisanie zmian w bazie
+    await customer.save();
+
+    res.status(200).json({ message: 'Hasło zostało pomyślnie zmienione' });
+  } catch (error) {
+    console.error('Błąd podczas zmiany hasła:', error);
+    res.status(500).json({ message: 'Błąd podczas zmiany hasła' });
   }
 };

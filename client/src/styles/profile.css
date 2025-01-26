@@ -9,8 +9,9 @@
       "profileCard profileAbout profileAbout"
       "profileLoans profileLoans profileLoans"
       "profileRemove . .";
-    margin-top: 20px;
+   
     margin-bottom: 20px;
+    padding-top: 20px;
 }
 
 .profileGrid .profileCard,
@@ -65,6 +66,10 @@
     font-size: 28px;
 }
 
+.saveButton {
+    cursor: pointer;
+}
+
 .profileCardBottom button,
 .changePassword button,
 .removeAccount button {
@@ -76,12 +81,26 @@
     border: 0;
 }
 
+.profileCardBottom button:hover,
+.changePassword button:hover,
+.removeAccount button:hover {
+    background-color: #fb8c8c; /* Zmieniony kolor tła na hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Cień na hover */
+    transform: scale(1.05); /* Delikatne powiększenie na hover */
+}
+
 .dataAction button {
     position: relative;
     padding: 16px;
     border-radius: 50px;
     border: 0;
     left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+.dataAction button:hover {
+    background-color: #fb8c8c; /* Kolor tła na hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Cień na hover */
+    transform: translate(-50%, -50%) scale(1.1); /* Powiększenie przycisku na hover */
 }
 
 .profileCardBottom button,
@@ -123,6 +142,7 @@
     position: relative;
     padding: 16px;
     left: 50%; top: 50%; transform: translate(-50%, -50%);
+    border: 1px solid lightgray;
 }
   
 .prName { grid-area: prName; }
@@ -270,7 +290,7 @@
     max-width: 50%;
     left: 50%; top: 50%; transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
+    color: black;
     font-size: 10px;
     line-height: 25px;
     font-weight: 500;
@@ -308,3 +328,42 @@
 
 .changePassword { height: 55%; border-bottom: 1px solid lightgray;}
 .removeAccount { height: 45%; }
+
+.dialog {
+    position: fixed; /* Ustawienie na stałe na ekranie */
+    bottom: 20px; /* Odstęp od dołu */
+    left: 50%; /* Przesunięcie w lewo o 50% szerokości ekranu */
+    transform: translateX(-50%); /* Przesunięcie w lewo o połowę szerokości okna, aby wyśrodkować */
+    background-color: white; /* Kolor tła */
+    padding: 20px; /* Odstępy wewnątrz */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Cień dla lepszej widoczności */
+    border-radius: 8px; /* Zaokrąglone rogi */
+    z-index: 1000; /* Upewnij się, że będzie na wierzchu innych elementów */
+}
+
+
+.dialog p {
+    margin: 0 0 10px 0; /* Odstęp między tekstem a przyciskami */
+}
+
+
+
+.cancelAction button { 
+    height: 45%; 
+    background-image: linear-gradient(to left, #d33e3e , #fb8c8c); 
+}
+
+.cancelAction button {
+    position: relative;
+    padding: 16px;
+    border-radius: 50px;
+    border: 0;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+.cancelAction button:hover {
+    background-color: #fb8c8c; /* Kolor tła na hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Cień na hover */
+    transform: translate(-50%, -50%) scale(1.1); /* Powiększenie przycisku na hover */
+}
+

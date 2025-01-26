@@ -11,6 +11,8 @@ const Login = ({ setUser }) => {
   const [last_name, setLastName] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const emailInputRef = useRef(null); // Ref dla pola e-mail
+  const passwordInputRef = useRef(null); // Ref dla pola hasła
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState(""); // Inicjalny brak błędu
   const navigate = useNavigate();
@@ -18,10 +20,15 @@ const Login = ({ setUser }) => {
   useEffect(() => {
     const loginButton = document.querySelector(".loginB .loginButton");
     const emailInput = document.querySelector(".loginB .loginInput");
+    const passwordInput = document.querySelector(".loginC .loginInput");
     
 
     if (emailInput) {
       emailInput.focus(); // Ustaw fokus na polu e-mail
+    }
+
+    if (passwordInput) {
+      passwordInput.focus(); // Ustaw fokus na polu hasła
     }
 
 
@@ -29,7 +36,9 @@ const Login = ({ setUser }) => {
       loginButton.addEventListener("click", handleEmailSubmit);
     }
 
-    
+    if (isPasswordVisible) {
+      passwordInputRef.current?.focus();
+    }
 
 
     return () => {
@@ -37,7 +46,7 @@ const Login = ({ setUser }) => {
         loginButton.removeEventListener("click", handleEmailSubmit);
       }
     };
-  }, []);
+  }, [isPasswordVisible]);
 
 
   const handleKeyDown = (event, action) => {
@@ -71,6 +80,7 @@ const Login = ({ setUser }) => {
           document.querySelector(".loginC").style.display = "block";
           document.querySelector(".loginB").style.display = "none";
           document.querySelector(".registerC").style.display = "none";
+          setIsPasswordVisible(true);
         } else {
           // Jeśli email nie istnieje, przejdź do ekranu rejestracji
           document.querySelector(".registerC").style.display = "block";
@@ -108,6 +118,7 @@ const Login = ({ setUser }) => {
           navigate("/profile");
         } else {
           setError("Błędne dane logowania");
+          alert("Błędne dane logowania");
         }
       })
       .catch((error) => setError("Błąd podczas logowania"));
@@ -170,7 +181,7 @@ const Login = ({ setUser }) => {
               <h1>Zaloguj się</h1>
               <p>Już jesteś naszym użytkownikiem. Zaloguj się, aby kontynuować.</p>
               <p><b>Hasło</b></p>
-              <input className="loginInput" type="password" placeholder="Wpisz swoje hasło" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleLogin)} />
+              <input ref={passwordInputRef} className="loginInput" type="password" placeholder="Wpisz swoje hasło" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => handleKeyDown(e, handleLogin)} />
               <p className="error">Sprawdź, czy podane hasło jest prawidłowe</p>
               <button className="loginButton" onClick={handleLogin}><b>Dokończ logowanie</b></button>
             </span>

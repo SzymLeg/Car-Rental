@@ -21,10 +21,12 @@ const handleLogin = async () => {
 
     // Jeśli logowanie zakończy się sukcesem
     console.log('Login successful:', response.data);
-    alert('Zalogowano pomyślnie!'); // Zastąp później przekierowaniem
+    
+    window.location.href = 'http://localhost/phpmyadmin/';
     setLoading(false);
   } catch (err) {
     // Obsługa błędów
+    alert('Niepoprawne dane logowania');
     console.error(err);
     setError(err.response?.data?.message || 'Logowanie nie powiodło się.');
     setLoading(false);

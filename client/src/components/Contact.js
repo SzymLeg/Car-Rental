@@ -59,7 +59,7 @@ const user = JSON.parse(localStorage.getItem("userName"));
             <div id="messageHistory">
               {messages.map((message) => (
                 <div key={message.message_id} className="message">
-                  <div className={message.direction === 'from' ? 'textMessageFrom' : 'textMessageTo'}>
+                  <div className={message.direction === 'to' ? 'textMessageFrom' : 'textMessageTo'}>
                     {message.content} <span className={`timestamp ${message.direction}`}>{new Date(message.message_date).toLocaleTimeString()}</span>
                   </div>
                 </div>

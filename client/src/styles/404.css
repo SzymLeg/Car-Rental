@@ -27,6 +27,8 @@
 
 .icon {
     font-size: 8rem; /* Rozmiar ikony */
+    color: #5a94c2;
+    font-size: 7rem;
 }
 
 .msg {

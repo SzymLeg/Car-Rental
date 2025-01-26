@@ -7,7 +7,13 @@ function Profile({ user, setUser }) {
     const [loading, setLoading] = useState(true); // Stan ładowania
     const [error, setError] = useState(null); // Stan błędu
     const [reservations, setReservations] = useState([]);
-    const [showDialog, setShowDialog] = useState(false);
+    const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [showCancelDialog, setCancelDialog] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
 
 
@@ -74,7 +80,6 @@ function Profile({ user, setUser }) {
       };
 
       const handleDeleteAccount = async () => {
-       
         try {
           setLoading(true);
           await axios.delete(`http://localhost:5000/api/customers/${customerData.id}`);
@@ -88,6 +93,60 @@ function Profile({ user, setUser }) {
           setLoading(false);
         }
       }
+
+      const getStatusClass = (status) => {
+        switch (status) {
+            case 'Zarezerwowane':
+                return 'activeLoan';
+            case 'Zakończone':
+                return 'futureLoan';
+            case 'Anulowane':
+                return 'pastLoan';
+            default:
+                return 'status-pending';  // domyślna klasa
+        }
+    };
+
+    const handleSaveChanges = () => {
+        
+        axios.put(`http://localhost:5000/api/customers/${customerData.id}`, { 
+        phone_number: phoneNumber,
+        email: email
+        });
+    
+        alert('Dane zostały zaktualizowane!');
+
+      
+      // Odśwież stronę po udanej aktualizacji
+      window.location.reload();
+        
+      };
+
+      const handleChangePassword = () => {
+        // Sprawdzanie, czy nowe hasło jest takie samo w obu polach
+        if (newPassword !== confirmNewPassword) {
+          alert('Nowe hasła nie pasują do siebie!');  
+          return;
+        }
+
+        const data = { new_password: newPassword };
+    
+        // Wysłanie zapytania PUT do serwera
+        axios
+        .patch(`http://localhost:5000/api/customers/${customerData.id}/change-password`, data)
+        .then((response) => {
+            alert('Hasło zostało zmienione!');
+            setNewPassword('');
+            setConfirmNewPassword('');
+            window.location.reload();
+          })
+          .catch((error) => {
+
+            console.error('Błąd:', error);
+          });
+      };
+
+      
     
 
 return (
@@ -103,7 +162,7 @@ return (
                         <div class="profileCardBottomTitle">
                             <div class="profileTitle">Witaj, {customerData.first_name}!</div>
                             <div class="profileSubtitle">Dobrze Cię znowu widzieć!</div>
-                            <button>Zatwierdź zmiany w profilu</button>
+                            <button class="saveButton" onClick={handleSaveChanges}>Zatwierdź zmiany w profilu</button>
                         </div>
                     </div>
                 </div>
@@ -116,12 +175,12 @@ return (
                         <div class="ouBirthday"> <p>{customerData.birthdate}</p> </div>
                         <div class="prPhone"> <p>Numer telefonu</p> </div>
                         <div class="ouPhone"> <p>{customerData.phone_number}</p> </div>
-                        <div class="inPhone"> <input type="tel" name="" id=""/> </div>
+                        <div class="inPhone"> <input type="tel"  name="" id="" onChange={(e) => setPhoneNumber(e.target.value)}/> </div>
                         <div class="prMail"> <p>Adres e-mail</p> </div>
                         <div class="ouMail"> <p>{customerData.email}</p> </div>
-                        <div class="inMail"> <input type="email" name="" id=""/></div>
-						/*
-                        <div class="prLicense"> <p>Uprawnienia</p> </div>
+                        <div class="inMail"> <input type="email"  name="" id="" onChange={(e) => setEmail(e.target.value)}/></div>
+						
+                        {/* <div class="prLicense"> <p>Uprawnienia</p> </div>
                         <div class="inLicense"> 
                             <label class="cr-wrapper">
                                 <input type="checkbox"/>
@@ -143,8 +202,8 @@ return (
                                 <input type="checkbox"/>
                                 <div class="cr-input"></div> <span>T</span>
                             </label>
-                        </div>
-						*/
+                        </div> */}
+						
                       </div>
                 </div>
 
@@ -162,13 +221,15 @@ return (
                         <p>Nie masz jeszcze żadnych rezerwacji.</p>
                     ) : (
                     reservations.map((reservation) => (
+                        
+
                     <div class="dataHistory">
                         <div class="dataStatus">
-                            <div class="loanStatus"> {reservation.status} </div>
+                        <div className={`loanStatus ${getStatusClass(reservation.status)}`}> {reservation.status} </div>
                         </div>
                         <div class="dataData">
-                          <div class="dataDataFrom"> <p>{reservation.start_date} Dodać czas</p> </div>
-                          <div class="dataDataTo"> <p>{reservation.end_date} Dodać czas</p> </div>
+                          <div class="dataDataFrom"> <p>{reservation.start_date}; {reservation.pickup_time}</p> </div>
+                          <div class="dataDataTo"> <p>{reservation.end_date}; {reservation.return_time}</p> </div>
                         </div>
                         <div class="dataPlace">
                           <div class="dataPlaceFrom"> <p>{reservation.pickup_location}</p> </div>
@@ -176,7 +237,8 @@ return (
                         </div>
                         <div class="dataVehicle"> <p>{reservation.Vehicle.brand} {reservation.Vehicle.model}</p> </div>
                         <div class="dataPrice"> <p>{reservation.amount} PLN</p> </div>
-                        <div class="dataAction"> <button onClick={() => updateReservationStatus(reservation.id, 'Anulowane', reservation.vehicle_id)}>Anuluj rezerwację</button> </div>
+                        <div class="dataAction cancelAction"> <button class="saveButton" onClick={() => updateReservationStatus(reservation.id, 'Anulowane', reservation.vehicle_id)} disabled={reservation.status != 'Zarezerwowane'}>Anuluj rezerwację</button> 
+                        </div>
                     </div>
                     ))
                     )}
@@ -186,21 +248,28 @@ return (
                     <div class="changePassword">
                         <h4>Zmień hasło</h4>
                         <p>Wpisz hasło: </p>
-                        <input type="password" name="" id=""/>
+                        <input type="password" name="" id="" onChange={(e) => setNewPassword(e.target.value)}/>
                         <p>Powtórz hasło: </p>
-                        <input type="password" name="" id=""/>
-                        <button>Zmień hasło</button>
+                        <input type="password" name="" id="" onChange={(e) => setConfirmNewPassword(e.target.value)}/>
+                        <button class="saveButton" onClick={() => setShowPasswordDialog(true)}>Zmień hasło</button>
+                        {showPasswordDialog && (
+                            <div className="dialog">
+                                <p>Czy na pewno chcesz zmienić swoje hasło? Tej akcji nie można cofnąć.</p>
+                                <button class="dataAction saveButton" onClick={handleChangePassword}>Tak, zmień</button>
+                                <button class="dataActionGreen saveButton" onClick={() => setShowPasswordDialog(false)}>Anuluj</button>
+                            </div>
+                        )}
                     </div>
 
                     <div class="removeAccount">
                         <h4>Usuń konto</h4>
                         <p>Twoje konto i dane osobowe zostaną usunięte z naszego systemu. Tej akcji nie można cofnąć.</p>
-                        <button onClick={() => setShowDialog(true)}>Usuń konto</button>
-                        {showDialog && (
+                        <button class="saveButton" onClick={() => setShowDeleteDialog(true)}>Usuń konto</button>
+                        {showDeleteDialog && (
                             <div className="dialog">
                                 <p>Czy na pewno chcesz usunąć swoje konto? Tej akcji nie można cofnąć.</p>
-                                <button onClick={handleDeleteAccount}>Tak, usuń</button>
-                                <button onClick={() => setShowDialog(false)}>Anuluj</button>
+                                <button class="dataAction saveButton" onClick={handleDeleteAccount}>Tak, usuń</button>
+                                <button class="dataActionGreen saveButton" onClick={() => setShowDeleteDialog(false)}>Anuluj</button>
                             </div>
                         )}
                     </div>

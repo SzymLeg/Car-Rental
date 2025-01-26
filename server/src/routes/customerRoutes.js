@@ -17,4 +17,6 @@ router.put('/:id', customerController.updateCustomer);
 // Trasa do usunięcia klienta
 router.delete('/:id', customerController.deleteCustomer);
 
+router.patch('/:id/change-password', customerController.changePassword);
+
 module.exports = router;

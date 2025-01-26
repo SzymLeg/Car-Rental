@@ -63,12 +63,18 @@
 
 .carImg_item {
     position: relative;
-    height: 100%;
     display: flex;
+    width: 250px;
     align-items: center; /* Wyśrodkowanie w pionie */
     justify-content: center; /* Opcjonalnie wyśrodkowanie w poziomie */
 }
 
+.carImg_item img {
+    width: 100%;
+    
+    object-fit: cover;
+    border-radius: 20px 0px 0px 20px;
+}
 .carInfo {
     position: relative;
     height: 100%;
@@ -94,6 +100,10 @@
 
 ul.features {
     padding-left: 10px;
+    display: block;
+    width: calc(100% - 10px);
+    height: 40px;
+
     
 }
 
@@ -141,7 +151,6 @@ input[type="checkbox"] {
     display: block;
     margin-right: 10px;
     margin-left: auto;
-    margin-top: 15px;
     padding: 10px;
     border: 0;
     border-radius: 5px;
@@ -154,4 +163,87 @@ input[type="checkbox"] {
 .checkOffer:hover,
 .checkOffer:active {
     background-color: #3f923b;
+}
+
+.checkOffer {
+    cursor: pointer;
+}
+
+.car_item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 16px -4px rgba(156, 158, 177, 1);
+    border-radius: 20px;
+    display: flex;
+}
+
+.availableCar {  
+    display: grid;
+    grid-template-columns: 250px 452px;
+    grid-template-rows: 250px;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "availableCarImg availableCarInfo";
+}
+  
+.availableCarImg { grid-area: availableCarImg; }
+
+.availableCarImg img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 20px 0px 0px 20px;
+}
+  
+.availableCarInfo {  
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 33.3% 33.3% 33.3%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "availableCarAbout availableCarAbout"
+      "availableCarAbout availableCarAbout"
+      "availableCarPrice availableCarReservation";
+    grid-area: availableCarInfo;
+}
+  
+.availableCarAbout { grid-area: availableCarAbout; } 
+.availableCarPrice { grid-area: availableCarPrice; }
+
+.availableCarPrice p {
+    position: relative;
+    left: 20px;
+    top: 50%; transform: translateY(-50%);
+}
+
+.availableCarPrice .basicPrice {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.availableCarReservation { 
+    grid-area: availableCarReservation; 
+    text-align: right;
+}
+
+.availableCarReservation button {
+    color: black;
+    position: relative;
+    padding: 16px;
+    border-radius: 50px;
+    right: 10px;
+    border: 0;
+    top: 50%; transform: translateY(-50%);
+    background-image: linear-gradient(to left, #3ed36d , #8cfbae);
+}
+
+.availableCarReservation button:hover {
+    background-image: linear-gradient(to left, #2e994f, #6cf089); /* Zmiana koloru */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Dodanie cienia */
+    transform: translateY(-50%) scale(1.05); /* Powiększenie przycisku */
 }

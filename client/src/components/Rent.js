@@ -139,8 +139,8 @@ const handleClickContinue = () => {
             <h3>{carData.brand} {carData.model}</h3>
             <div id="carLoanPanel">
                 <div id="aboutCarInfo">
-                    <div class="aboutCarInfo carPhoto">
-                        
+                    <div class="availableCarImg">
+                    <img src={`${process.env.PUBLIC_URL}/./vehicles/${carData.image}`} alt=""></img>
                     </div>
                     <div class="aboutCarInfo carStats">
                         <h4 class="loanInfoHeading">Informacje o pojeździe</h4>
