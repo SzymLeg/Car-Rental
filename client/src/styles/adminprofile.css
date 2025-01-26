@@ -1,0 +1,126 @@
+.adminGrid {  display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: 300px 800px;
+    grid-auto-columns: 1fr;
+    gap: 20px 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "adminLogged adminLogged editDatabase"
+      "chatPanel chatPanel chatPanel";
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+ 
+.adminLogged { grid-area: adminLogged; }
+.editDatabase { grid-area: editDatabase; }
+.chatPanel {
+    display: grid; 
+    grid-template-columns: 50% 50%; 
+    grid-template-rows: 100px 700px; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "chatResponse chatFind"
+      "chatChat chatChat"; 
+    grid-area: chatPanel; 
+}
+
+.chatResponse { grid-area: chatResponse; }
+.chatFind { grid-area: chatFind; }
+.chatChat { grid-area: chatChat; }
+
+.adminLogged,
+.editDatabase,
+.chatPanel {
+    border: 1px solid lightgray;
+    border-radius: 20px;
+}
+
+.adminWelcome {
+    text-align: center;
+}
+
+.welcomeTop,
+.welcomeBottom {
+    position: relative;
+    width: 100%;
+}
+
+.welcomeTop { height: 210px; }
+.welcomeBottom { height: 90px; }
+
+.welcomeTop img {
+    position: relative;
+    height: 90%;
+    top: 20px;
+}
+
+.welcomeText {
+    position: relative;
+    top: 50%; transform: translateY(-50%);
+}
+
+.welcomeText h1,
+.welcomeText h2 {
+    padding: 0; margin: 0;
+}
+
+.welcomeText h1 { font-weight: 600; }
+
+.accessDatabase {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    top: 50%; transform: translateY(-50%);
+    text-align: center;
+}
+
+.editDatabase button,
+.chatFindRight button {
+    position: relative;
+    padding: 16px;
+    border-radius: 50px;
+    border: 0;
+    background-image: linear-gradient(to left, #3ed36d , #8cfbae);
+}
+
+.chatResponse h2,
+.chatResponse p {
+    position: relative;
+    left: 20px;
+}
+
+.chatFind {
+    position: relative;
+    display: flex;
+}
+
+.chatFindLeft,
+.chatFindRight {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.chatFindLeft input {
+    position: relative;
+    padding: 16px;
+    border: 1px solid lightgray;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+.chatFindRight button {
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+
+#contactBox {
+    height: 100% !important;
+    margin-top: 0 !important;
+}
+
+#messenger {
+    height: calc(100% - 70px) !important;
+}
+
+#sendMessage {
+    height: 55px !important;
+}
