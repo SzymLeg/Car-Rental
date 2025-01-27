@@ -63,12 +63,6 @@ function Profile({ user, setUser }) {
         try {
           setLoading(true);
           await axios.put(`http://localhost:5000/api/reservations/${reservationId}`, { status: newStatus });
-          // Po udanej zmianie statusu, odśwież dane rezerwacji
-          if (newStatus === "Anulowane") {
-            // Jeśli rezerwacja została anulowana, zmień status pojazdu na "available"
-            await axios.put(`http://localhost:5000/api/vehicles/${vehicleId}`, { status: "available" });
-        }
-          
           window.location.reload();
           alert('Status rezerwacji został zmieniony!');
         } catch (err) {
@@ -108,6 +102,19 @@ function Profile({ user, setUser }) {
     };
 
     const handleSaveChanges = () => {
+        // Walidacja numeru telefonu (9 cyfr)
+    const phoneRegex = /^[0-9]{9}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+        alert("Numer telefonu musi składać się z dokładnie 9 cyfr.");
+        return;
+    }
+
+    // Walidacja adresu e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Podaj poprawny adres e-mail.");
+        return;
+    }
         
         axios.put(`http://localhost:5000/api/customers/${customerData.id}`, { 
         phone_number: phoneNumber,
@@ -116,10 +123,8 @@ function Profile({ user, setUser }) {
     
         alert('Dane zostały zaktualizowane!');
 
-      
       // Odśwież stronę po udanej aktualizacji
-      window.location.reload();
-        
+      window.location.reload(); 
       };
 
       const handleChangePassword = () => {

@@ -35,7 +35,6 @@ const user = JSON.parse(localStorage.getItem("userName"));
         
       const response = await axios.post('http://localhost:5000/api/messages', {
         user_id: user.id, // Przykładowe ID użytkownika
-        to: 31, // Kierunek wiadomości
         content: newMessage,
       });
 

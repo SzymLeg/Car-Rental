@@ -112,6 +112,7 @@ const Login = ({ setUser }) => {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
             id: data.user.id,
+            email: email,
           };
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
           setUser(userData);
@@ -141,6 +142,7 @@ const Login = ({ setUser }) => {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
             id: data.user.id,
+            email: email,
           };
           localStorage.setItem("userName", JSON.stringify(userData)); // Zapisz jako JSON
   

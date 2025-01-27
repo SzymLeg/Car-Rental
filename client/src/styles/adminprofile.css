@@ -83,6 +83,16 @@
     background-image: linear-gradient(to left, #3ed36d , #8cfbae);
 }
 
+.editDatabase button:hover {
+    background-image: linear-gradient(to right, #3ed36d, #8cfbae); /* Możesz zmienić kierunek gradientu, jeśli chcesz */
+    transform: scale(1.05); /* Dodaje efekt powiększenia przy najechaniu */
+}
+
+.chatFindRight button:hover {
+    background-image: linear-gradient(to right, #3ed36d, #8cfbae);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
 .chatResponse h2,
 .chatResponse p {
     position: relative;
@@ -123,4 +133,21 @@
 
 #sendMessage {
     height: 55px !important;
+}
+.timestampAdmin {
+    font-size: 0.8em;
+    color: gray;
+    position: absolute;
+    bottom: -10px;
+}
+
+.timestampAdmin.from {
+    left: 0;
+    padding-left: 10px;
+  
+}
+
+.timestampAdmin.to {
+    right: 0;
+    padding-right: 10px;
 }

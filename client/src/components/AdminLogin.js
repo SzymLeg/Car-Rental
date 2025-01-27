@@ -19,10 +19,20 @@ const handleLogin = async () => {
       password,
     });
 
+    const city = email.split('@')[0];
+
+    const adminData = {
+      email: email,
+      city: city,
+
+    };
+
+    localStorage.setItem("adminInfo", JSON.stringify(adminData));
+
     // Jeśli logowanie zakończy się sukcesem
     console.log('Login successful:', response.data);
     
-    window.location.href = 'http://localhost/phpmyadmin/';
+    window.location.href = '/admin-profile';
     setLoading(false);
   } catch (err) {
     // Obsługa błędów

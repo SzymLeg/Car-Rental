@@ -115,3 +115,6 @@ exports.changePassword = async (req, res) => {
     res.status(500).json({ message: 'Błąd podczas zmiany hasła' });
   }
 };
+
+
+

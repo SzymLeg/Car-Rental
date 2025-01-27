@@ -47,8 +47,11 @@ const Reservation = sequelize.define('Reservation', {
     pickup_location: { type: DataTypes.STRING, allowNull: false }, // Miejsce odbioru
     return_location: { type: DataTypes.STRING, allowNull: false }, // Miejsce zwrotu
     amount: { type: DataTypes.DECIMAL(10, 2), allowNull: false }, // Kwota rezerwacji
-}, {
-    timestamps: true, // Włączenie createdAt i updatedAt
+    drivers_count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }, // Liczba kierowców
+    baby_seat_0_1_count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }, // Liczba fotelików 0-1
+    baby_seat_1_3_count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }, // Liczba fotelików 1-3
+    baby_seat_3_12_count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }, // Liczba fotelików 3-12
+    gps_count: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }, // Liczba GPS-ów
 });
 
 // Synchronizacja modelu z bazą danych

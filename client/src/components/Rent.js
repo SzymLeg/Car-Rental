@@ -24,10 +24,18 @@ function Rent() {
 const handleClickContinue = () => {
     localStorage.removeItem('reservationData'); // Usunięcie poprzednich danych rezerwacji
     const userData = JSON.parse(localStorage.getItem('userName'));
-    console.log(userData);
+
+    if (!userData) {
+        alert('Musisz być zalogowany, aby kontynuować rezerwację.');
+        window.location.href = '/login';
+        return; // Zakończ wykonywanie funkcji
+    }
+
     const reservationData = {
         customer_id: userData.id, // Możesz to pobrać z sesji użytkownika
+        customer_email: userData.email,
         vehicle_id: carData.id,
+        vehicle_info: `${carData.brand} ${carData.model} ${carData.year}`,
         start_date: PickupDate,
         end_date: ReturnDate,
         pickup_time: PickupTime,
@@ -35,7 +43,14 @@ const handleClickContinue = () => {
         status: 'Zarezerwowane',
         pickup_location: PickupLocation,
         return_location: ReturnLocation,
+        pickup_street: pickupStreet,
+        return_street: returnStreet,
         amount: totalPrice,
+        drivers_count: driversCount,
+        baby_seat_0_1_count: babySeat0To1Count,
+        baby_seat_1_3_count: babySeat1To3Count,
+        baby_seat_3_12_count: babySeat3To12Count,
+        gps_count: gpsCount
     };
     localStorage.setItem('reservationData', JSON.stringify(reservationData));
     // Przeniesienie na stronę płatności
@@ -136,7 +151,7 @@ const handleClickContinue = () => {
     <section>
         <div class="resizer">
             <h1>Twoja oferta</h1>
-            <h3>{carData.brand} {carData.model}</h3>
+            <h3>{carData.brand} {carData.model} ({carData.year})</h3>
             <div id="carLoanPanel">
                 <div id="aboutCarInfo">
                     <div class="availableCarImg">

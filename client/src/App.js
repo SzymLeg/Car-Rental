@@ -23,7 +23,7 @@ import Payment from "./components/Payment";
 import Error from "./components/e404";
 import Success from "./components/Success";
 import Profile from "./components/Profile";
-import Profile from "./components/AdminProfile";
+import AdminProfile from "./components/AdminProfile";
 
 
 import './styles/about.css';
@@ -87,6 +87,7 @@ function App() {
           <Route path="*" element={<><Header user={user} setUser={setUser}/><Error/><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
           <Route path="/success" element={<><Header user={user} setUser={setUser}/><Success /><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
           <Route path="/profile" element={<><Header user={user} setUser={setUser}/><Profile user={user} setUser={setUser}/><PageMap user={user} setUser={setUser}/><Footer /><Copyright /></>} />
+          <Route path="/admin-profile" element={<><Header user={user} setUser={setUser}/><AdminProfile user={user} setUser={setUser}/><PageMap user={user} setUser={setUser}/><Footer /><Copyright/></>} />
         </Routes>
       </div>
       {/* Przycisk przewijania na górę */}

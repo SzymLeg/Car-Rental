@@ -1,5 +1,6 @@
 const Reservation = require('../models/Reservation');
 const Vehicle = require('../models/Vehicle');
+const sendConfirmationEmail = require('../services/emailService');
 
 exports.getAllReservations = async (req, res) => {
     try {
@@ -24,9 +25,11 @@ exports.getReservationById = async (req, res) => {
 };
 
 exports.createReservation = async (req, res) => {
+    const reservationDetails = req.body;
     try {
         const reservation = await Reservation.create(req.body);
         res.status(201).json({ message: 'Rezerwacja dodana', reservation });
+        sendConfirmationEmail(reservationDetails.customer_email, reservationDetails);
     } catch (error) {
         res.status(500).json({ message: 'Błąd podczas dodawania rezerwacji', error });
     }
